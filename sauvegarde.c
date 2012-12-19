@@ -8,12 +8,12 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-#include <glib.h>
+#include "glib.h"
 #include <time.h>
  #include <locale.h>
 
 #define TAILLEBUF 100
-#define FICHIERIMAGE "vuillemin.jpg"
+#define FICHIERIMAGE "./Serveur/vuillemin.jpg"
 
 int OuvreRapport(const char *employe) {
   int res, r;

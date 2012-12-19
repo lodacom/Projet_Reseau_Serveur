@@ -1,0 +1,135 @@
+$<$html$>$ $<$body$>$ 
+\begin{DoxyPre}
+\section*{Projet\_Reseau}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+Projet d'enregistrement de rapports d'activités dans une entreprise:\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\subsection*{Employé:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+*Se connecter
+*Vérifier s'il doit rédiger rapport
+*Rédiger et envoyer le contenu du rapport (par bloc de message)\end{DoxyPre}
+
+
+
+\begin{DoxyPre}*Juste avant la déconnexion de l'employé le serveur envoie la version final pdf
+à l'employé et prévient le contrôleur.
+\subsection*{Contrôleur:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+*Se connecter
+*Envoyer la liste des employés (ceux qui doivent rédiger un rapport)
+*Vérifier la présence d'un rapport (doit attendre la déconnexion d'un employé pour consulter)
+*Consulter un rapport\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\subsection*{\hyperlink{class_serveur}{Serveur}:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+*On suppose que le premier utilisateur connecté devient le contrôleur
+*Recevoir une liste d'employés
+*Recevoir les rapports sous forme texte
+*Renvoyer au format pdf à l'expéditeur
+*Enregistrer les rapports
+*Envoyer au contrôleur aussi s'il y a eu demande de sa part\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\subsection*{Outils:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+*Eclipse
+*NetBeans
+*GitHub\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\subsection*{Langages de programmations:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+*C++ -> coder en objet\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\subsection*{Protocole de connexion/déconnexion:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+*TCP/IP\end{DoxyPre}
+
+
+
+\begin{DoxyPre}Architecture  de l'application "Enregistrement de rapports d'activités dans une entreprise":\end{DoxyPre}
+
+
+
+\begin{DoxyPre}*Il n'y a pas de phase d'inscription c'est nous qui établissons la liste des employés et désignons le contrôleur dans le fichier\end{DoxyPre}
+
+
+
+\begin{DoxyPre}*Classe de connexion pour les clients (chaque client a son dossier sur le serveur)
+*Classe de rédaction d'un rapport
+*Classe envoi de rapport (par bloc)-> dépôt dans chaque dossier correspondant à l'utilisateur
+*Classe de déconnexion -> gérer la déconnexion du contrôleur
+*Classe d'envoie de liste d'employé avec adresse ip de ceux-ci
+*Classe de renvoie de rapport en pdf 
+*Classe d'enregistrement de rapport (sous forme texte) -> appels systèmes (concaténation blocs par blocs) -> déjà fait par la prof
+*Classe de consultation de rapport (envoie sous forme pdf) 
+*Classe de vérification si l'employé doit rédiger un rapport\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\subsection*{Schémas algorithmes:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}
+Employé:
+Connexion
+Si la liste d'employé existe
+Alors l'employé s'authentifie
+  Si l'authentification est bonne
+        on vérifie s'il y'a une demande de rapport
+        S'il y en a un
+        rédaction du rapport-> accès en prenant le verrou de cette ressource
+        envoi du rapport
+        recevoir le rapport final en pdf
+        Fin si
+    Fin si
+Fin si
+Déconnexion\end{DoxyPre}
+
+
+
+\begin{DoxyPre}\hyperlink{class_serveur}{Serveur}:\end{DoxyPre}
+
+
+
+\begin{DoxyPre}Attente d'une demande de connexion
+Vérification de la connexion
+Si vérification ok
+Alors
+    Si 
+Sinon rejet
+Fin si
+    </body>
+</html>
+\end{DoxyPre}

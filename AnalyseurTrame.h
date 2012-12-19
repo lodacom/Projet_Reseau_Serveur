@@ -12,16 +12,12 @@ using namespace std;
 
 class AnalyseurTrame {
 public:
-	AnalyseurTrame(string);
+	AnalyseurTrame();
 	~AnalyseurTrame();
-	void Analyse();
-    string DecisionAction();
+	string Analyse(string);
 public:
 	char recu[1000];
 	int tp;
-    string message;
-    string action;
-    string transmission;
 };
 
 #endif /* ANALYSEURTRAME_H_ */

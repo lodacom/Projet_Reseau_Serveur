@@ -10,24 +10,28 @@
 
 #include "sock.h"
 #include "sockdist.h"
-#include "ListeEmploye.h"
 #include "AnalyseurTrame.h"
 #include <vector>
+#include <string>
 using namespace std;
 
 class Serveur {
 public:
 	Serveur();
 	~Serveur();
-	bool Ecoute();
-    bool AccueilClients();
-	void LancementServeur(string);
-    void ActionServeur(string);
+    string Analyse(string);
+    void Ecoute();
+    void AccueilEmploye();
+    bool EstDansListeEtablitControleur(string);
+    int ChercheDansListeEtablitControleur(string);
+	string LancementServeur(string);
+    string ActionServeur(string);
+    void RedigeRapport();
 public:
 	int destLocal;
 	sockaddr_in* adresseExp;
 	socklen_t taille;
-	char envoi[1000];
+	char envoi[100];
     struct thread_data
     {
         int mondesc;//le descripteur que l'on attribut à un client
@@ -35,8 +39,10 @@ public:
     };
     vector<thread_data> liste_thread;
     vector<int> descripteur_cli;
-    pthread_t threads[1000];
-    
+    pthread_t threads[100];
+    vector<string> liste_etablit_controleur;
+    vector<string> liste_rapport_fait;
+    vector<string> liste_rapport_encours;
 };
 
 #endif /* SERVEUR_H_ */
