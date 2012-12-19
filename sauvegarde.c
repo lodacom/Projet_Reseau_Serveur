@@ -10,10 +10,10 @@
 #include <errno.h>
 #include "glib.h"
 #include <time.h>
- #include <locale.h>
+#include <locale.h>
 
 #define TAILLEBUF 100
-#define FICHIERIMAGE "./Serveur/vuillemin.jpg"
+#define FICHIERIMAGE "vuillemin.jpg"
 
 int OuvreRapport(const char *employe) {
   int res, r;
@@ -103,7 +103,7 @@ int Ecrit(const char *message, const char *employe) {
   GString *s = NULL;
 
   // setlocale(LC_TIME, "fr_FR") si vous n'utilisez pas l'encodage utf8
-  if (setlocale(LC_TIME, "fr_FR.utf8")==NULL) {
+  if (setlocale(LC_TIME, "fr_FR")==NULL) {
     perror("probleme avec setlocal ");
     return -1;
   }
@@ -116,6 +116,7 @@ int Ecrit(const char *message, const char *employe) {
   res = stat(employe, &st);
   if (res == -1) {
     if (errno == ENOENT) { // le répertoire n'existe pas
+        printf("Création du répertoire du client\n");
       res = mkdir(employe, S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH);
       if (res == -1) {
 	perror("problème à la création du répertoire");

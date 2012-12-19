@@ -24,6 +24,7 @@ public:
     void AccueilEmploye();
     bool EstDansListeEtablitControleur(string);
     int ChercheDansListeEtablitControleur(string);
+    int ChercheDansListeEnCours(string);
 	string LancementServeur(string);
     string ActionServeur(string);
     void RedigeRapport();

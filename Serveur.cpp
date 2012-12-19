@@ -6,6 +6,7 @@
  */
 
 #include "Serveur.h"
+#include "sauvegarde.c"
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
@@ -59,6 +60,9 @@ string Serveur::Analyse(string p_message)
             if (this->EstDansListeEtablitControleur(transmission))
             {
                 cout << "Vous êtes un employé au rapport!" << endl;
+                int index=this->ChercheDansListeEtablitControleur(transmission);
+                this->liste_etablit_controleur.erase(this->liste_etablit_controleur.begin()+index);//on enlève l'employé de la liste des "rapport à faire"
+                this->liste_rapport_encours.push_back(transmission);//on le met dans la liste des "rapport en cours"
                 return "employe";
             }
             else
@@ -70,28 +74,38 @@ string Serveur::Analyse(string p_message)
     }
     if (action.compare("partie_rapport")==0)
     {
-        
+        int i=0;
         while(i<transmission.length() and transmission.at(i)!='@')
         {
             i++;
         }
         string pseudo=transmission.substr(0,i);
+        cout << "L'employé: " << pseudo << " écrit..." << endl;
         string mess=transmission.substr(i+1,transmission.length());
-        if (this->EstDansListeEtablitControleur(pseudo))
+        if (Ecrit(mess.c_str(), pseudo.c_str())==-1)
         {
-            int index=this->ChercheDansListeEtablitControleur(pseudo);
-            this->liste_etablit_controleur.erase(this->liste_etablit_controleur.begin()+index);
+            cout << "Y a eu un truc qui s'est passé!!" << endl;
+        }
+        else
+        {
+            cout << "Sa à l'air bon......" << endl;
         }
         cout << "On écrit le rapport..." << endl;
         return "partie_recue";
     }
-    if (action.compare("suite_rapport")==0)
-    {
-        cout << "Suite de la chaine de la section" << endl;
-        return "suite_recue";
-    }
     if (action.compare("deconnexion")==0)
     {
+        int index=this->ChercheDansListeEnCours(transmission);
+        this->liste_rapport_encours.erase(this->liste_rapport_encours.begin()+index);
+        this->liste_rapport_fait.push_back(transmission);
+        if (OuvreRapport(transmission.c_str())==-1)
+        {
+            cout << "Erreur d'ouverture du rapport..." << endl;
+        }
+        else
+        {
+            cout << "On a réussi à ouvrir le rapport mais où?" << endl;
+        }
         cout << "Un utilisateur se déconnecte" << endl;
         return "deconnexion";
     }
@@ -121,7 +135,11 @@ string Serveur::ActionServeur(string p_action)
     {
         message="rapport>";
     }
-    return message;
+    if (p_action=="impossible")
+    {
+        return p_action;
+    }
+    return "reimpossible";
 }
 
 void Serveur::AccueilEmploye()
@@ -165,13 +183,31 @@ int Serveur::ChercheDansListeEtablitControleur(string p_pseudo)
     }
     if (i<this->liste_etablit_controleur.size())
     {
-        return i-1;
+        return i-1;//voir documentation vector dans C++ reference
     }
     else
     {
         return -1;
     }
 }
+
+int Serveur::ChercheDansListeEnCours(string p_pseudo)
+{
+    int i=0;
+    while(i<this->liste_rapport_encours.size() and this->liste_rapport_encours[i].compare(p_pseudo)!=0)
+    {
+        i++;
+    }
+    if (i<this->liste_rapport_encours.size())
+    {
+        return i-1;//voir documentation vector dans C++ reference
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 string Serveur::LancementServeur(string p_message)
 {
     // Reception du message
