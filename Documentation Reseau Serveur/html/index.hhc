@@ -9,43 +9,6 @@
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Liste des classes"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="AnalyseurTrame"><param name="Local" value="class_analyseur_trame.html"><param name="ImageNumber" value="1"></OBJECT>
-      <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AnalyseurTrame"><param name="Local" value="class_analyseur_trame.html#abe62cc4a2f68bd1c1d777363e2b4cb65"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="~AnalyseurTrame"><param name="Local" value="class_analyseur_trame.html#ac09780ac1e31242d8cd3208e547cf8fe"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Analyse"><param name="Local" value="class_analyseur_trame.html#a44c4888e43a39bf8295eda4872070948"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="recu"><param name="Local" value="class_analyseur_trame.html#a13079899ad6b9c2af3835ffd71f71e08"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="tp"><param name="Local" value="class_analyseur_trame.html#a92ecc1f6adb0d26bf21e7e6575107a74"><param name="ImageNumber" value="11"></OBJECT>
-      </UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Serveur"><param name="Local" value="class_serveur.html"><param name="ImageNumber" value="1"></OBJECT>
-      <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="thread_data"><param name="Local" value="struct_serveur_1_1thread__data.html"><param name="ImageNumber" value="1"></OBJECT>
-        <UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="descs_cli"><param name="Local" value="struct_serveur_1_1thread__data.html#a3a44b675cc9e6cb69a875ce58103f31f"><param name="ImageNumber" value="11"></OBJECT>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="mondesc"><param name="Local" value="struct_serveur_1_1thread__data.html#a95c4d2ea7693fd200e97515034d24d43"><param name="ImageNumber" value="11"></OBJECT>
-        </UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Serveur"><param name="Local" value="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Serveur"><param name="Local" value="class_serveur.html#a722aefd65c9efab0b3e0646bf3440ea1"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="AccueilEmploye"><param name="Local" value="class_serveur.html#a4ebd92717a7ee46a363f5c1816a99f56"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ActionServeur"><param name="Local" value="class_serveur.html#abc20e0793f7907e8d8b1596f6046aa47"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Analyse"><param name="Local" value="class_serveur.html#a770b3b736207e2e0f4e99a44e6dbfbcf"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ChercheDansListeEnCours"><param name="Local" value="class_serveur.html#a397592d70951ac24f178a2003bd369de"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="ChercheDansListeEtablitControleur"><param name="Local" value="class_serveur.html#a1d08a6af05112c72e679f9e2c7223850"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="Ecoute"><param name="Local" value="class_serveur.html#af4e624ed5818b967f99c5abbc966212c"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="EstDansListeEtablitControleur"><param name="Local" value="class_serveur.html#a5950c36f0775a3c5b01f22ceaa443171"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="LancementServeur"><param name="Local" value="class_serveur.html#a5b54a380c06fa431c7adb18b6b7b9eda"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="RedigeRapport"><param name="Local" value="class_serveur.html#a36263ad96b1619d079ec49c54773496f"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="adresseExp"><param name="Local" value="class_serveur.html#a745aeefe5b63991eefffb6b1b79762f4"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="descripteur_cli"><param name="Local" value="class_serveur.html#a350976885f84b87f2c6533b4b327a867"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="destLocal"><param name="Local" value="class_serveur.html#a606f8c26e8ddeba7bb84e8661525e37f"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="envoi"><param name="Local" value="class_serveur.html#a1abee959761a58815f7878483c635fa5"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_etablit_controleur"><param name="Local" value="class_serveur.html#a0b74dc824f0b93f9fd141723c46033d2"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_rapport_encours"><param name="Local" value="class_serveur.html#ac7776debc1b77647886d34bad7d39580"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_rapport_fait"><param name="Local" value="class_serveur.html#a7e782ca7679ec1a84dd79ac36a214df6"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_thread"><param name="Local" value="class_serveur.html#abc61f04a941acabe63665a6147321c04"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="taille"><param name="Local" value="class_serveur.html#a03c8b41efd2a24cceefe748f3986dc88"><param name="ImageNumber" value="11"></OBJECT>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="threads"><param name="Local" value="class_serveur.html#ab55a69165d516980da7587b35f67584a"><param name="ImageNumber" value="11"></OBJECT>
-      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="Sock"><param name="Local" value="class_sock.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="Sock"><param name="Local" value="class_sock.html#a88c9112bb9779f1eac3c119dd988ea1a"><param name="ImageNumber" value="11"></OBJECT>
@@ -65,6 +28,11 @@
       <LI><OBJECT type="text/sitemap"><param name="Name" value="getAdrDist"><param name="Local" value="class_sock_dist.html#a03dfa728b21bfd0ab228a5a671a81648"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="getsLen"><param name="Local" value="class_sock_dist.html#afa8bbad9517c5f1941cd890495b296cf"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="thread_data"><param name="Local" value="structthread__data.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="descs_cli"><param name="Local" value="structthread__data.html#a6f8927f7ea34989e2d8d0dfa870a0738"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="mondesc"><param name="Local" value="structthread__data.html#aa2a4c9277a3ef6de228eba6e78dbc4ab"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
     </UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Index des classes"><param name="Local" value="classes.html"><param name="ImageNumber" value="11"></OBJECT>
   </UL>
@@ -72,11 +40,45 @@
   <UL>
   <LI><OBJECT type="text/sitemap"><param name="Name" value="Liste des fichiers"><param name="Local" value="files.html"><param name="ImageNumber" value="1"></OBJECT>
     <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="AnalyseurTrame.h"><param name="Local" value="_analyseur_trame_8h_source.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="sauvegarde.h"><param name="Local" value="sauvegarde_8h_source.html"><param name="ImageNumber" value="11"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Name" value="Serveur.h"><param name="Local" value="_serveur_8h_source.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Serveur.cpp"><param name="Local" value="_serveur_8cpp.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="thread_data"><param name="Local" value="structthread__data.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="descs_cli"><param name="Local" value="structthread__data.html#a6f8927f7ea34989e2d8d0dfa870a0738"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="mondesc"><param name="Local" value="structthread__data.html#aa2a4c9277a3ef6de228eba6e78dbc4ab"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="AccueilEmploye"><param name="Local" value="_serveur_8cpp.html#aa49f98875197a7ffc64375923bfe3943"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ActionServeur"><param name="Local" value="_serveur_8cpp.html#a4188ad82765fa91c496f0f72a7ee5a9c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Analyse"><param name="Local" value="_serveur_8cpp.html#ae3d13f80d5d3a32e6b9714718ce447e0"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ChercheDansListeEnCours"><param name="Local" value="_serveur_8cpp.html#a7d804b7b891b8f9a05d363fe4344896d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ChercheDansListeEtablitControleur"><param name="Local" value="_serveur_8cpp.html#acf841da7f5daeda48d7d86e1b45a6e7f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ChercheDansListeFait"><param name="Local" value="_serveur_8cpp.html#a30f40f7283df807b6853631dc165ad5c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="EstDansListeEtablitControleur"><param name="Local" value="_serveur_8cpp.html#a0ec4900c2c94807292234dd32c9ee0a8"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="LancementServeur"><param name="Local" value="_serveur_8cpp.html#a3de1805a780477627bc1a3e093773279"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="main"><param name="Local" value="_serveur_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="RunServeur"><param name="Local" value="_serveur_8cpp.html#a9b762f9d7c83150c1c690a8a5fa604f3"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Serveur"><param name="Local" value="_serveur_8cpp.html#a7272059ce8f76bb7435c851be799d681"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="adresseExp"><param name="Local" value="_serveur_8cpp.html#ad65dd953df0f1cbdb6cbef3315e9828c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="descripteur_cli"><param name="Local" value="_serveur_8cpp.html#a82095472adf3b2ebec38aa0a7c1d767b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="destLocal"><param name="Local" value="_serveur_8cpp.html#aa94479d03b3fee7c767be09c49e369e8"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="envoi"><param name="Local" value="_serveur_8cpp.html#af9dd1e168a677b76ee41b85bca44530d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_etablit_controleur"><param name="Local" value="_serveur_8cpp.html#aa40f1d38a0c6068d06cbfdf94aef86a6"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_rapport_encours"><param name="Local" value="_serveur_8cpp.html#a27df6d5f4ed712667b07b7347a70be87"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_rapport_fait"><param name="Local" value="_serveur_8cpp.html#a460b2808d3a06c8a79e794e82fbc9921"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="liste_thread"><param name="Local" value="_serveur_8cpp.html#ada7e6c9944c431477bcf47f2e2ef27f4"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="nombre_client"><param name="Local" value="_serveur_8cpp.html#ab7f63b9b9120361bb3a4b757ef5a325f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="recu"><param name="Local" value="_serveur_8cpp.html#a65fd8dcfa67db7b8203084314c46d53f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="taille"><param name="Local" value="_serveur_8cpp.html#aa38712007f1072b88bcb85086db02cec"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="thread"><param name="Local" value="_serveur_8cpp.html#ac8e874d266e3fd4235fd94a11980692f"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="sock.h"><param name="Local" value="sock_8h_source.html"><param name="ImageNumber" value="11"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="sockdist.h"><param name="Local" value="sockdist_8h_source.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Membres de fichier"><param name="Local" value="globals.html"><param name="ImageNumber" value="11"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Tout"><param name="Local" value="globals.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Fonctions"><param name="Local" value="globals_func.html"><param name="ImageNumber" value="11"></OBJECT>
     </UL>
   </UL>
 </UL>

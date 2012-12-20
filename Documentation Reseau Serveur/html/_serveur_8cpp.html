@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Projet Reseau: Référence du fichier Serveur.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Projet Reseau
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.2 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier Serveur.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Programme permettant de lancer le serveur.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;sock.h&quot;</code><br/>
+<code>#include &quot;sockdist.h&quot;</code><br/>
+<code>#include &quot;sauvegarde.c&quot;</code><br/>
+<code>#include &lt;vector&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;errno.h&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &lt;unistd.h&gt;</code><br/>
+<code>#include &lt;pthread.h&gt;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structthread__data.html">thread_data</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a7272059ce8f76bb7435c851be799d681"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7272059ce8f76bb7435c851be799d681"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a7272059ce8f76bb7435c851be799d681">Serveur</a> ()</td></tr>
+<tr class="memdesc:a7272059ce8f76bb7435c851be799d681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction permettant d'initialisé le serveur. <br/></td></tr>
+<tr class="separator:a7272059ce8f76bb7435c851be799d681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d804b7b891b8f9a05d363fe4344896d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a7d804b7b891b8f9a05d363fe4344896d">ChercheDansListeEnCours</a> (string p_pseudo)</td></tr>
+<tr class="memdesc:a7d804b7b891b8f9a05d363fe4344896d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cherche dans la liste des rapports s'il y a p_pseudo.  <a href="#a7d804b7b891b8f9a05d363fe4344896d"></a><br/></td></tr>
+<tr class="separator:a7d804b7b891b8f9a05d363fe4344896d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf841da7f5daeda48d7d86e1b45a6e7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#acf841da7f5daeda48d7d86e1b45a6e7f">ChercheDansListeEtablitControleur</a> (string p_pseudo)</td></tr>
+<tr class="memdesc:acf841da7f5daeda48d7d86e1b45a6e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cherche dans la liste établie par le controleur s'il y a p_pseudo.  <a href="#acf841da7f5daeda48d7d86e1b45a6e7f"></a><br/></td></tr>
+<tr class="separator:acf841da7f5daeda48d7d86e1b45a6e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f40f7283df807b6853631dc165ad5c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a30f40f7283df807b6853631dc165ad5c">ChercheDansListeFait</a> (string p_pseudo)</td></tr>
+<tr class="memdesc:a30f40f7283df807b6853631dc165ad5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cherche dans la liste des rapports qui ont été fait s'il y a p_pseudo.  <a href="#a30f40f7283df807b6853631dc165ad5c"></a><br/></td></tr>
+<tr class="separator:a30f40f7283df807b6853631dc165ad5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec4900c2c94807292234dd32c9ee0a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a0ec4900c2c94807292234dd32c9ee0a8">EstDansListeEtablitControleur</a> (string p_pseudo)</td></tr>
+<tr class="memdesc:a0ec4900c2c94807292234dd32c9ee0a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cherche dans la liste établit par le contrôleur s'il y a p_pseudo.  <a href="#a0ec4900c2c94807292234dd32c9ee0a8"></a><br/></td></tr>
+<tr class="separator:a0ec4900c2c94807292234dd32c9ee0a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d13f80d5d3a32e6b9714718ce447e0"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#ae3d13f80d5d3a32e6b9714718ce447e0">Analyse</a> (string p_message)</td></tr>
+<tr class="memdesc:ae3d13f80d5d3a32e6b9714718ce447e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'analyser ce qui arrive dans la trame que l'on a reçu.  <a href="#ae3d13f80d5d3a32e6b9714718ce447e0"></a><br/></td></tr>
+<tr class="separator:ae3d13f80d5d3a32e6b9714718ce447e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4188ad82765fa91c496f0f72a7ee5a9c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a4188ad82765fa91c496f0f72a7ee5a9c">ActionServeur</a> (string p_action)</td></tr>
+<tr class="memdesc:a4188ad82765fa91c496f0f72a7ee5a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de répondre au client en fonction du message que l'on a eu.  <a href="#a4188ad82765fa91c496f0f72a7ee5a9c"></a><br/></td></tr>
+<tr class="separator:a4188ad82765fa91c496f0f72a7ee5a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3de1805a780477627bc1a3e093773279"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a3de1805a780477627bc1a3e093773279">LancementServeur</a> (string p_message)</td></tr>
+<tr class="memdesc:a3de1805a780477627bc1a3e093773279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de recevoir tous les messages.  <a href="#a3de1805a780477627bc1a3e093773279"></a><br/></td></tr>
+<tr class="separator:a3de1805a780477627bc1a3e093773279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b762f9d7c83150c1c690a8a5fa604f3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a9b762f9d7c83150c1c690a8a5fa604f3">RunServeur</a> (void *p)</td></tr>
+<tr class="memdesc:a9b762f9d7c83150c1c690a8a5fa604f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de gérer plusieurs employés en même temps grâce aux threads.  <a href="#a9b762f9d7c83150c1c690a8a5fa604f3"></a><br/></td></tr>
+<tr class="separator:a9b762f9d7c83150c1c690a8a5fa604f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa49f98875197a7ffc64375923bfe3943"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa49f98875197a7ffc64375923bfe3943"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#aa49f98875197a7ffc64375923bfe3943">AccueilEmploye</a> ()</td></tr>
+<tr class="memdesc:aa49f98875197a7ffc64375923bfe3943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'accueillir les employés en les acceptant. <br/></td></tr>
+<tr class="separator:aa49f98875197a7ffc64375923bfe3943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_serveur_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Point d'entré du programme et qui permet de le lancer.  <a href="#a3c04138a5bfe5d72780bb7e82a18e627"></a><br/></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa94479d03b3fee7c767be09c49e369e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa94479d03b3fee7c767be09c49e369e8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>destLocal</b></td></tr>
+<tr class="separator:aa94479d03b3fee7c767be09c49e369e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f63b9b9120361bb3a4b757ef5a325f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7f63b9b9120361bb3a4b757ef5a325f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>nombre_client</b> =0</td></tr>
+<tr class="separator:ab7f63b9b9120361bb3a4b757ef5a325f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad65dd953df0f1cbdb6cbef3315e9828c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad65dd953df0f1cbdb6cbef3315e9828c"></a>
+sockaddr_in *&#160;</td><td class="memItemRight" valign="bottom"><b>adresseExp</b></td></tr>
+<tr class="separator:ad65dd953df0f1cbdb6cbef3315e9828c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38712007f1072b88bcb85086db02cec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa38712007f1072b88bcb85086db02cec"></a>
+socklen_t&#160;</td><td class="memItemRight" valign="bottom"><b>taille</b></td></tr>
+<tr class="separator:aa38712007f1072b88bcb85086db02cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9dd1e168a677b76ee41b85bca44530d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9dd1e168a677b76ee41b85bca44530d"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>envoi</b> [100]</td></tr>
+<tr class="separator:af9dd1e168a677b76ee41b85bca44530d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65fd8dcfa67db7b8203084314c46d53f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65fd8dcfa67db7b8203084314c46d53f"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>recu</b> [100]</td></tr>
+<tr class="separator:a65fd8dcfa67db7b8203084314c46d53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82095472adf3b2ebec38aa0a7c1d767b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82095472adf3b2ebec38aa0a7c1d767b"></a>
+vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>descripteur_cli</b></td></tr>
+<tr class="separator:a82095472adf3b2ebec38aa0a7c1d767b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa40f1d38a0c6068d06cbfdf94aef86a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa40f1d38a0c6068d06cbfdf94aef86a6"></a>
+vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>liste_etablit_controleur</b></td></tr>
+<tr class="separator:aa40f1d38a0c6068d06cbfdf94aef86a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460b2808d3a06c8a79e794e82fbc9921"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a460b2808d3a06c8a79e794e82fbc9921"></a>
+vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>liste_rapport_fait</b></td></tr>
+<tr class="separator:a460b2808d3a06c8a79e794e82fbc9921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27df6d5f4ed712667b07b7347a70be87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27df6d5f4ed712667b07b7347a70be87"></a>
+vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>liste_rapport_encours</b></td></tr>
+<tr class="separator:a27df6d5f4ed712667b07b7347a70be87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e874d266e3fd4235fd94a11980692f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8e874d266e3fd4235fd94a11980692f"></a>
+struct <a class="el" href="structthread__data.html">thread_data</a>&#160;</td><td class="memItemRight" valign="bottom"><b>thread</b></td></tr>
+<tr class="separator:ac8e874d266e3fd4235fd94a11980692f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada7e6c9944c431477bcf47f2e2ef27f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada7e6c9944c431477bcf47f2e2ef27f4"></a>
+vector&lt; <a class="el" href="structthread__data.html">thread_data</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>liste_thread</b></td></tr>
+<tr class="separator:ada7e6c9944c431477bcf47f2e2ef27f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Programme permettant de lancer le serveur. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Duplouy Olivier Burc Pierre </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>20 décembre 2012</dd></dl>
+<p>Enregistrement de rapports d'activité dans une entreprise </p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a4188ad82765fa91c496f0f72a7ee5a9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string ActionServeur </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de répondre au client en fonction du message que l'on a eu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_action </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>une string correspondant à ce qu'on veut renvoyer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae3d13f80d5d3a32e6b9714718ce447e0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Analyse </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet d'analyser ce qui arrive dans la trame que l'on a reçu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>une string correspondant à ce qu'on veut renvoyer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7d804b7b891b8f9a05d363fe4344896d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ChercheDansListeEnCours </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_pseudo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cherche dans la liste des rapports s'il y a p_pseudo. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_pseudo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>l'index i quand on l'a trouvé -1 sinon </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acf841da7f5daeda48d7d86e1b45a6e7f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ChercheDansListeEtablitControleur </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_pseudo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cherche dans la liste établie par le controleur s'il y a p_pseudo. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_pseudo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>l'index i quand on l'a trouvé -1 sinon </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a30f40f7283df807b6853631dc165ad5c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ChercheDansListeFait </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_pseudo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cherche dans la liste des rapports qui ont été fait s'il y a p_pseudo. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_pseudo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>l'index i quand on l'a trouvé -1 sinon </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0ec4900c2c94807292234dd32c9ee0a8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EstDansListeEtablitControleur </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_pseudo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cherche dans la liste établit par le contrôleur s'il y a p_pseudo. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_pseudo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>vrai si p_pseudo est présent dans la liste établie par le controleur </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3de1805a780477627bc1a3e093773279"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string LancementServeur </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>p_message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de recevoir tous les messages. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>p_message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>une string correspondant à ce qu'on veut renvoyer </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Point d'entré du programme et qui permet de le lancer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>argc, char** argv </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0 si ça s'est bien passé </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9b762f9d7c83150c1c690a8a5fa604f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * RunServeur </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de gérer plusieurs employés en même temps grâce aux threads. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">void*</td><td>p </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>si ça s'est bien passé ou non </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Jeudi Décembre 20 2012 16:32:17 pour Projet Reseau par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.2
+</small></address>
+</body>
+</html>

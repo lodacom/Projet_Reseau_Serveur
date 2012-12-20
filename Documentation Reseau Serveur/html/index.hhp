@@ -12,27 +12,24 @@ Title=Projet Reseau
 main="Projet Reseau","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
 
 [FILES]
-_analyseur_trame_8h_source.html
 sauvegarde_8h_source.html
-_serveur_8h_source.html
 sock_8h_source.html
 sockdist_8h_source.html
+_serveur_8cpp.html
 md__r_e_a_d_m_e.html
-class_analyseur_trame.html
-class_analyseur_trame-members.html
-class_serveur.html
-class_serveur-members.html
-struct_serveur_1_1thread__data.html
-struct_serveur_1_1thread__data-members.html
 class_sock.html
 class_sock-members.html
 class_sock_dist.html
 class_sock_dist-members.html
+structthread__data.html
+structthread__data-members.html
 index.html
 pages.html
 annotated.html
 classes.html
 files.html
+globals.html
+globals_func.html
 tab_a.png
 tab_b.png
 tab_h.png
