@@ -72,6 +72,10 @@ string Serveur::Analyse(string p_message)
             }
         }
     }
+    if (action.compare("ajout_employe")==0)
+    {
+        this->liste_etablit_controleur.push_back(transmission);
+    }
     if (action.compare("partie_rapport")==0)
     {
         int i=0;
@@ -92,6 +96,29 @@ string Serveur::Analyse(string p_message)
         }
         cout << "On écrit le rapport..." << endl;
         return "partie_recue";
+    }
+    if (action.compare("demande_liste_rapport_fait")==0)
+    {
+        for (int i=0;i<this->liste_rapport_fait.size();i++)
+        {
+            cout << "employé: " << this->liste_rapport_fait[i];
+        }
+        return "liste_rapport_fait";
+    }
+    if (action.compare("demande_rapport")==0)
+    {
+        if (OuvreRapport(transmission.c_str())==-1)
+        {
+            cout << "Erreur d'ouverture du rapport..." << endl;
+        }
+        else
+        {
+            cout << "On a réussi à ouvrir le rapport mais où?" << endl;
+        }
+        cout << "Vous allez recevoir le rapport de: "<< transmission     << endl;
+        int index=this->ChercheDansListeFait(transmission);
+        
+        return "au_rapport";
     }
     if (action.compare("deconnexion")==0)
     {
@@ -199,6 +226,23 @@ int Serveur::ChercheDansListeEnCours(string p_pseudo)
         i++;
     }
     if (i<this->liste_rapport_encours.size())
+    {
+        return i-1;//voir documentation vector dans C++ reference
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int Serveur::ChercheDansListeFait(string p_pseudo)
+{
+    int i=0;
+    while(i<this->liste_rapport_fait.size() and this->liste_rapport_fait[i].compare(p_pseudo)!=0)
+    {
+        i++;
+    }
+    if (i<this->liste_rapport_fait.size())
     {
         return i-1;//voir documentation vector dans C++ reference
     }

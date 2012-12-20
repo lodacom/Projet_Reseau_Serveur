@@ -25,6 +25,7 @@ public:
     bool EstDansListeEtablitControleur(string);
     int ChercheDansListeEtablitControleur(string);
     int ChercheDansListeEnCours(string);
+    int ChercheDansListeFait(string);
 	string LancementServeur(string);
     string ActionServeur(string);
     void RedigeRapport();
