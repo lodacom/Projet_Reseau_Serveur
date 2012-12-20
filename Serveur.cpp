@@ -26,7 +26,6 @@ sockaddr_in* adresseExp;
 socklen_t taille;
 char envoi[100];
 char recu[100];
-vector<int> descripteur_cli;
 vector<string> liste_etablit_controleur;
 vector<string> liste_rapport_fait;
 vector<string> liste_rapport_encours;
@@ -34,7 +33,7 @@ vector<string> liste_rapport_encours;
 struct thread_data
 {
     int mondesc;//le descripteur que l'on attribut à un client
-    vector<int> descs_cli;//vecteur de tous les descripteurs des clients
+    string pseudo;//pseudo de l'employé qui s'est connecté
 }thread;
 vector<thread_data> liste_thread;
 
@@ -157,21 +156,21 @@ string Analyse(string p_message)
 	//read(mydata->desc1,recu,sizeof recu);
     //char* message=recu;
     //string inter=message;
-    printf("Analyse de la trame...\n");
+    //printf("Analyse de la trame...\n");
     int i=0;
-    cout << p_message << endl;
+    //cout << p_message << endl;
     while(i<p_message.length() and p_message.at(i)!='>')
     {
         i++;
     }
     string action=p_message.substr(0,i);
     string transmission=p_message.substr(i+1,p_message.length());
-    cout << "La trame a été analysée avec action: "<< action << " et message: " << transmission << endl;
+    //cout << "La trame a été analysée avec action: "<< action << " et message: " << transmission << endl;
     
-    printf("On décide de ce qu'on va faire\n");
+    //printf("On décide de ce qu'on va faire\n");
     if (action.compare("connexion")==0)
     {
-        cout << "Un utilisateur se connecte..." << endl;
+        //cout << "Un utilisateur se connecte..." << endl;
         //liste_etablit_controleur.push_back("coucou");//on fait comme si coucou avait été ajouté par le controleur
         return "connexion...";
     }
@@ -179,7 +178,7 @@ string Analyse(string p_message)
     {
         if (transmission.compare("controleur")==0)
         {
-            cout << "Un controleur se connecte..." << endl;
+            //cout << "Un controleur se connecte..." << endl;
             return "controleur";
         }
         else
@@ -312,7 +311,7 @@ string ActionServeur(string p_action)
 string LancementServeur(string p_message)
 {
     // Reception du message
-    printf("On lance le serveur...\n");
+    //printf("On lance le serveur...\n");
     string message=p_message;
     string action=Analyse(message);
     return ActionServeur(action);
@@ -327,34 +326,36 @@ string LancementServeur(string p_message)
 void* RunServeur(void* p)
 {
     string message;
-    struct thread_data *mydata;
-    mydata=(struct thread_data *)p;
-    if(mydata->mondesc == mydata->descs_cli[0])
-    {
-        cout << "Entrain d'exécuter le client num: " << mydata->mondesc << endl;
-        
-        cout << "Saisissez une chaîne pour le test" << endl;
-        getline(cin, message);
-        cout << "Le message reçue est: " << message << endl;
-        while (LancementServeur(message).compare("rapport>")!=0)
-        {
-            cout << "Saisissez une chaîne pour le test" << endl;
-            getline(cin, message);
-        }
-    }
-    if(mydata->mondesc == mydata->descs_cli[1])
-    {
-        cout << "Entrain d'exécuter le client num: " << mydata->mondesc << endl;
-        
-        cout << "Saisissez une chaîne pour le test" << endl;
-        getline(cin, message);
-        while (LancementServeur(message).compare("rapport>")!=0)
-        {
-            cout << "Saisissez une chaîne pour le test" << endl;
-            getline(cin, message);
-        }
-    }
+    string nom=((struct thread_data *)p)->pseudo;
+    int desc=((struct thread_data *)p)->mondesc;
     
+    cout << "Start run : " << nom << endl;
+    cout << "Entrain d'exécuter le client num: " << desc << endl;
+    sleep(2);
+    message="connexion>";
+    while (LancementServeur(message).compare("rapport>")!=0)
+    {
+        message="connexion_employe>"+nom;
+        LancementServeur(message);
+        
+        if (nom.compare("controleur")==0)
+        {
+            message="ajout_employe>coucou";
+            LancementServeur(message);
+        }
+        else
+        {
+            message="connexion_employe>coucou";
+            LancementServeur(message);
+            
+            message="partie_rapport>coucou@Coucou Olivier";
+            LancementServeur(message);
+        }
+        message="deconnexion>"+nom;
+        //cout << "Saisissez une chaîne pour le test" << endl;
+        //getline(cin, message);
+    }
+
     pthread_exit(NULL);
 }
 
@@ -399,16 +400,16 @@ int main(int argc, char** argv)
     */
     //Premier utilisateur
     thread.mondesc=0;
-    thread.descs_cli.push_back(0);
+    thread.pseudo="coucou";
     liste_thread.push_back(thread);
     
     //Deuxième utilisateur
     thread.mondesc=1;
-    thread.descs_cli.push_back(1);
+    thread.pseudo="controleur";
     liste_thread.push_back(thread);
     
-    pthread_create(&threads[0],NULL,RunServeur,(void*)&liste_thread[0]);
     pthread_create(&threads[1],NULL,RunServeur,(void*)&liste_thread[1]);
+    pthread_create(&threads[0],NULL,RunServeur,(void*)&liste_thread[0]);
     
     pthread_join(threads[0],NULL);
     pthread_join(threads[1],NULL);
