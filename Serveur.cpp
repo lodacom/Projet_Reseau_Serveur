@@ -26,9 +26,17 @@ sockaddr_in* adresseExp;
 socklen_t taille;
 char envoi[100];
 char recu[100];
+#define LISTE_ETABLIT_CONTROLEUR "liste_etablit_controleur"
+#define LISTE_RAPPORT_FAIT "liste_rapport_fait"
+#define LISTE_RAPPORT_ENCOURS "liste_rapport_encours"
+FILE * liste_etablit_controleur_fichier;
+FILE * liste_rapport_fait_fichier;
+FILE * liste_rapport_encours_fichier;
+//-----------------------------------------
 vector<string> liste_etablit_controleur;
 vector<string> liste_rapport_fait;
 vector<string> liste_rapport_encours;
+//-----------------------------------------
 
 struct thread_data
 {
@@ -84,18 +92,58 @@ int ChercheDansListeEnCours(string p_pseudo)
  */
 int ChercheDansListeEtablitControleur(string p_pseudo)
 {
-    int i=0;
-    while(i<liste_etablit_controleur.size() and liste_etablit_controleur[i].compare(p_pseudo)!=0)
+    cout << "On cherche à savoir si " << p_pseudo << " est dans la liste établit par le controleur" << endl;
+    FILE * lecf=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
+    if (lecf==NULL)
     {
-        i++;
+        cout << "Problème d'ouverture de fichier" << endl;
     }
-    if (i<liste_etablit_controleur.size())
+    bool trouve=false;
+    fseek(lecf, 0, SEEK_END);
+    if (ftell (lecf)==0)
     {
-        return i;//voir documentation vector dans C++ reference
+        cout << "Y a un truc là!!!!" << endl;
+        return false;
     }
     else
     {
-        return -1;
+        int courant=fseek(lecf, 0, SEEK_SET);
+        cout << "On effectue la recherche..." << endl;
+        string concat="";
+        char recup;
+        while ((recup=fgetc(lecf))!=EOF)
+        {
+            cout << recup << endl;
+            if(recup == '@')
+            {
+                 if(concat.compare(p_pseudo)==0)
+                 {
+                        cout << "trouvé" << endl;
+                        trouve = true;
+                        break;
+                 }
+                 concat = "";
+                 courant=ftell(lecf);
+                 cout << "On a trouvé le arobase" << endl;
+            }
+            else
+            {
+                concat += recup;
+                cout << "On concatène" << endl;
+            }
+        }
+    }
+    fclose(lecf);
+    if (!trouve)
+    {
+        //écraser à partir de courant jusqu' à la taille de pseudo + 1
+        cout << "On a pas trouvé l'employé" << endl;
+        return false;
+    }
+    else
+    {
+        cout << "Youpi on a trouvé l'employé: " << p_pseudo << endl; 
+        return true;
     }
 }
 
@@ -130,18 +178,56 @@ int ChercheDansListeFait(string p_pseudo)
  */
 bool EstDansListeEtablitControleur(string p_pseudo)
 {
-    int i=0;
-    while(i<liste_etablit_controleur.size() and liste_etablit_controleur[i].compare(p_pseudo)!=0)
+    cout << "On cherche à savoir si " << p_pseudo << " est dans la liste établit par le controleur" << endl;
+    FILE * lecf=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
+    if (lecf==NULL)
     {
-        i++;
+        cout << "Problème d'ouverture de fichier" << endl;
     }
-    if (i<liste_etablit_controleur.size())
+    bool trouve=false;
+    fseek(lecf, 0, SEEK_END);
+    if (ftell (lecf)==0)
     {
-        return true;
+        cout << "Y a un truc là!!!!" << endl;
+        return false;
     }
     else
     {
+        fseek(lecf, 0, SEEK_SET);
+        cout << "On effectue la recherche..." << endl;
+        string concat="";
+        char recup;
+        while ((recup=fgetc(lecf))!=EOF)
+        {
+            cout << recup << endl;
+            if(recup == '@')
+            {
+                 if(concat.compare(p_pseudo)==0)
+                 {
+                        cout << "trouvé" << endl;
+                        trouve = true;
+                        break;
+                 }
+                 concat = "";
+                 cout << "On a trouvé le arobase" << endl;
+            }
+            else
+            {
+                concat += recup;
+                cout << "On concatène" << endl;
+            }
+        }
+    }
+    fclose(lecf);
+    if (!trouve)
+    {
+        cout << "On a pas trouvé l'employé" << endl;
         return false;
+    }
+    else
+    {
+        cout << "Youpi on a trouvé l'employé: " << p_pseudo << endl; 
+        return true;
     }
 }
 
@@ -171,7 +257,7 @@ string Analyse(string p_message)
     if (action.compare("connexion")==0)
     {
         //cout << "Un utilisateur se connecte..." << endl;
-        //liste_etablit_controleur.push_back("coucou");//on fait comme si coucou avait été ajouté par le controleur
+        liste_etablit_controleur.push_back("coucou");//on fait comme si coucou avait été ajouté par le controleur
         return "connexion...";
     }
     if (action.compare("connexion_employe")==0)
@@ -179,6 +265,16 @@ string Analyse(string p_message)
         if (transmission.compare("controleur")==0)
         {
             //cout << "Un controleur se connecte..." << endl;
+            liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
+            if (fseek(liste_etablit_controleur_fichier, 0, SEEK_END)==0)
+            {
+                fclose (liste_etablit_controleur_fichier);
+                liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "w");
+            }
+            else
+            {
+                cout<< "Liste déjà remplie. . ." << endl;
+            }
             return "controleur";
         }
         else
@@ -186,9 +282,9 @@ string Analyse(string p_message)
             cout << "Un employé se connecte..." << endl;
             if (EstDansListeEtablitControleur(transmission))
             {
-                int index=ChercheDansListeEtablitControleur(transmission);
-                liste_etablit_controleur.erase(liste_etablit_controleur.begin()+index);//on enlève l'employé de la liste des "rapport à faire"
-                liste_rapport_encours.push_back(transmission);//on le met dans la liste des "rapport en cours"
+                ChercheDansListeEtablitControleur(transmission);
+                //liste_etablit_controleur.erase(liste_etablit_controleur.begin()+index);//on enlève l'employé de la liste des "rapport à faire"
+                //liste_rapport_encours.push_back(transmission);//on le met dans la liste des "rapport en cours"
                 cout << "Vous êtes un employé au rapport!" << endl;
                 return "employe";
             }
@@ -201,7 +297,15 @@ string Analyse(string p_message)
     }
     if (action.compare("ajout_employe")==0)
     {
-        liste_etablit_controleur.push_back(transmission);
+        if (!EstDansListeEtablitControleur(transmission))
+        {
+            transmission+="@";
+            fputs (transmission.c_str(),liste_etablit_controleur_fichier);
+        }
+        else
+        {
+            cout << "Désolé le pseudo existe déjà!!" << endl;
+        }
     }
     if (action.compare("partie_rapport")==0)
     {
@@ -408,10 +512,10 @@ int main(int argc, char** argv)
     thread.pseudo="controleur";
     liste_thread.push_back(thread);
     
-    pthread_create(&threads[1],NULL,RunServeur,(void*)&liste_thread[1]);
+   // pthread_create(&threads[1],NULL,RunServeur,(void*)&liste_thread[1]);
     pthread_create(&threads[0],NULL,RunServeur,(void*)&liste_thread[0]);
     
     pthread_join(threads[0],NULL);
-    pthread_join(threads[1],NULL);
+   // pthread_join(threads[1],NULL);
 	return 0;
 }
