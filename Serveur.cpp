@@ -21,6 +21,7 @@
 using namespace std;
 
 int destLocal;
+bool controleur_present=false;
 int nombre_client=0;
 sockaddr_in* adresseExp;
 socklen_t taille;
@@ -32,8 +33,6 @@ char recu[100];
 FILE * liste_etablit_controleur_fichier;
 //FILE * liste_rapport_fait_fichier;
 //FILE * liste_rapport_encours_fichier;
-//-----------------------------------------
-//vector<string> liste_rapport_fait;
 //-----------------------------------------
 
 struct thread_data
@@ -64,36 +63,22 @@ vector<string> LectureDansListeFait()
     vector<string> liste_rapport_fait;
     cout << "On cherche à établir la liste des rapports faits" << endl;
     FILE * lrf=fopen(LISTE_RAPPORT_FAIT, "r");
-    if (lrf==NULL)
+    cout << "On effectue la recherche..." << endl;
+    string concat="";
+    char recup;
+    while ((recup=fgetc(lrf))!=EOF)
     {
-        cout << "Problème d'ouverture de fichier" << endl;
-    }
-    bool trouve=false;
-    fseek(lrf, 0, SEEK_END);
-    if (ftell (lrf)==0)
-    {
-        cout << "Y a un truc là!!!!" << endl;
-        return NULL;
-    }
-    else
-    {
-        cout << "On effectue la recherche..." << endl;
-        string concat="";
-        char recup;
-        while ((recup=fgetc(lrf))!=EOF)
+        //cout << recup << endl;
+        if(recup == '@')
         {
-            //cout << recup << endl;
-            if(recup == '@')
-            {
-                liste_rapport_fait.push_back(concat);
-                concat = "";
-                cout << "On a trouvé le arobase" << endl;
-            }
-            else
-            {
-                concat += recup;
-                cout << "On concatène" << endl;
-            }
+            liste_rapport_fait.push_back(concat);
+            concat = "";
+            cout << "On a trouvé le arobase" << endl;
+        }
+        else
+        {
+            concat += recup;
+            cout << "On concatène" << endl;
         }
     }
     fclose(lrf);
@@ -109,7 +94,7 @@ vector<string> LectureDansListeFait()
 int ChercheDansListeEnCours(string p_pseudo)
 {
     int courant=0;
-    cout << "On cherche à enlever " << p_pseudo << " de la liste établit par le controleur" << endl;
+    cout << "On cherche à enlever " << p_pseudo << " de la liste des rapports en cours" << endl;
     FILE * lrecf=fopen(LISTE_RAPPORT_ENCOURS, "r");
     if (lrecf==NULL)
     {
@@ -256,7 +241,7 @@ int ChercheDansListeEtablitControleur(string p_pseudo)
 int ChercheDansListeFait(string p_pseudo)
 {
     int courant=0;
-    cout << "On cherche à enlever " << p_pseudo << " de la liste établit par le controleur" << endl;
+    cout << "On cherche à enlever " << p_pseudo << " de la liste des rapports faits" << endl;
     FILE * lrf=fopen(LISTE_RAPPORT_FAIT, "r");
     if (lrf==NULL)
     {
@@ -408,31 +393,41 @@ string Analyse(string p_message)
     if (action.compare("connexion")==0)
     {
         //cout << "Un utilisateur se connecte..." << endl;
-        fputs ("coucou@",liste_etablit_controleur_fichier);//on fait comme si coucou avait été ajouté par le controleur
+        //fputs ("coucou@",liste_etablit_controleur_fichier);//on fait comme si coucou avait été ajouté par le controleur
         return "connexion...";
     }
     if (action.compare("connexion_employe")==0)
     {
         if (transmission.compare("controleur")==0)
         {
-            //cout << "Un controleur se connecte..." << endl;
-            liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
-            fseek(liste_etablit_controleur_fichier, 0, SEEK_END);
-            if (ftell(liste_etablit_controleur_fichier)==0)
+            if (!controleur_present)
             {
-                fclose (liste_etablit_controleur_fichier);
-                liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "w");
-                fclose(liste_etablit_controleur_fichier);
+                //cout << "Un controleur se connecte..." << endl;
+                controleur_present=true;
+                liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
+                fseek(liste_etablit_controleur_fichier, 0, SEEK_END);
+                if (ftell(liste_etablit_controleur_fichier)==0)
+                {
+                    fclose (liste_etablit_controleur_fichier);
+                    liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "w");
+                    fclose(liste_etablit_controleur_fichier);
+                }
+                else
+                {
+                    cout<< "Liste déjà remplie. . ." << endl;
+                }
+                return "controleur";
             }
             else
             {
-                cout<< "Liste déjà remplie. . ." << endl;
+                cout << "Un controleur existe déjà désolé" << endl;
+                return "refuse";
             }
-            return "controleur";
         }
         else
         {
             cout << "Un employé se connecte..." << endl;
+            //mutex 1 ici (mode lock)
             if (EstDansListeEtablitControleur(transmission))
             {
                 ChercheDansListeEtablitControleur(transmission);
@@ -448,6 +443,7 @@ string Analyse(string p_message)
                 cout << "Vous avez été refusé par le serveur" << endl;
                 return "refuse";
             }
+            //mutex 1 (mode unlock)
         }
     }
     if (action.compare("ajout_employe")==0)
@@ -456,7 +452,7 @@ string Analyse(string p_message)
         {
             transmission+="@";
             liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "a");
-            fputs (transmission.c_str(),liste_etablit_controleur_fichier);
+            fputs (transmission.c_str(),liste_etablit_controleur_fichier);//ajout d'un employé dans la liste établit par le controleur
             fclose(liste_etablit_controleur_fichier);
             cout << "Un employé a été ajouté dans le fichier" << endl;
         }
@@ -497,6 +493,7 @@ string Analyse(string p_message)
     }
     if (action.compare("demande_rapport")==0)
     {
+        //fait par le controleur sur demande avec le pseudo de l'utilisateur demandé
         if (OuvreRapport(transmission.c_str())==-1)
         {
             cout << "Erreur d'ouverture du rapport..." << endl;
@@ -506,11 +503,14 @@ string Analyse(string p_message)
             cout << "On a réussi à ouvrir le rapport mais où?" << endl;
         }
         cout << "Vous allez recevoir le rapport de: "<< transmission     << endl;
-        ChercheDansListeFait(transmission);
+        //mutex 2 ici en mode lock
+        ChercheDansListeFait(transmission);//on enlève du fichier qui contient la liste des rapports qui sont fait
+        //mutex 2 mode unlock
         return "au_rapport";
     }
     if (action.compare("deconnexion")==0)
     {
+        //mutex 2 ici en mode lock
         ChercheDansListeEnCours(transmission);
         FILE* lrecf=fopen(LISTE_RAPPORT_FAIT, "a");
         transmission+="@";
@@ -524,6 +524,7 @@ string Analyse(string p_message)
         {
             cout << "On a réussi à ouvrir le rapport mais où?" << endl;
         }
+        //mutex 2 en mode unlock
         cout << "Un utilisateur se déconnecte" << endl;
         return "deconnexion";
     }
