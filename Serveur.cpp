@@ -30,12 +30,10 @@ char recu[100];
 #define LISTE_RAPPORT_FAIT "liste_rapport_fait"
 #define LISTE_RAPPORT_ENCOURS "liste_rapport_encours"
 FILE * liste_etablit_controleur_fichier;
-FILE * liste_rapport_fait_fichier;
-FILE * liste_rapport_encours_fichier;
+//FILE * liste_rapport_fait_fichier;
+//FILE * liste_rapport_encours_fichier;
 //-----------------------------------------
-vector<string> liste_etablit_controleur;
-vector<string> liste_rapport_fait;
-vector<string> liste_rapport_encours;
+//vector<string> liste_rapport_fait;
 //-----------------------------------------
 
 struct thread_data
@@ -59,6 +57,47 @@ void Serveur()
     listen(destLocal, 100);*/
     printf("Démarrage du serveur....\n");
 
+}
+
+vector<string> LectureDansListeFait()
+{
+    vector<string> liste_rapport_fait;
+    cout << "On cherche à établir la liste des rapports faits" << endl;
+    FILE * lrf=fopen(LISTE_RAPPORT_FAIT, "r");
+    if (lrf==NULL)
+    {
+        cout << "Problème d'ouverture de fichier" << endl;
+    }
+    bool trouve=false;
+    fseek(lrf, 0, SEEK_END);
+    if (ftell (lrf)==0)
+    {
+        cout << "Y a un truc là!!!!" << endl;
+        return NULL;
+    }
+    else
+    {
+        cout << "On effectue la recherche..." << endl;
+        string concat="";
+        char recup;
+        while ((recup=fgetc(lrf))!=EOF)
+        {
+            //cout << recup << endl;
+            if(recup == '@')
+            {
+                liste_rapport_fait.push_back(concat);
+                concat = "";
+                cout << "On a trouvé le arobase" << endl;
+            }
+            else
+            {
+                concat += recup;
+                cout << "On concatène" << endl;
+            }
+        }
+    }
+    fclose(lrf);
+    return liste_rapport_fait;
 }
 
 /**
@@ -398,7 +437,9 @@ string Analyse(string p_message)
             {
                 ChercheDansListeEtablitControleur(transmission);
                 transmission+="@";
-                fputs (transmission.c_str(),liste_rapport_encours_fichier);//transfert dans la liste rapport en cours
+                FILE* lrecf=fopen(LISTE_RAPPORT_ENCOURS, "a");
+                fputs (transmission.c_str(),lrecf);//transfert dans la liste rapport en cours
+                fclose(lrecf);
                 cout << "Vous êtes un employé au rapport!" << endl;
                 return "employe";
             }
@@ -447,7 +488,11 @@ string Analyse(string p_message)
     }
     if (action.compare("demande_liste_rapport_fait")==0)
     {
-        
+        vector<string> temp=LectureDansListeFait();
+        for(int i=0;i<temp.size();i++)
+        {
+            cout << temp[i] << endl;
+        }
         return "liste_rapport_fait";
     }
     if (action.compare("demande_rapport")==0)
