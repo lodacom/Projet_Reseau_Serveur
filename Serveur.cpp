@@ -59,7 +59,12 @@ void Serveur()
     printf("Démarrage du serveur....\n");
 
 }
-
+/**
+ * \param int desc,string pseudo
+ * \brief Permet d'envoyer le rapport à l'employé qui a fini
+ * son rapport mais également au controleur qui a fait une 
+ * demande
+ */
 void TransfertRapport(int desc,string pseudo)
 {
     char recup;
@@ -90,6 +95,11 @@ void TransfertRapport(int desc,string pseudo)
     }
 }
 
+/**
+ * \fn vector<string> LectureDansListeFait()
+ * \brief On veut récupérer tous les employés qui ont fini leur rapport
+ * \return renvoi la liste de tous les employés ayant fini leur rapport
+ */
 vector<string> LectureDansListeFait()
 {
     vector<string> liste_rapport_fait;
