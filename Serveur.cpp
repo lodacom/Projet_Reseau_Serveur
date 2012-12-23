@@ -49,15 +49,45 @@ vector<thread_data> liste_thread;
  */
 void Serveur()
 {
-	/*SockDist Expd("0",31466);// pour autotest 31466/31467
-	Sock BRlocal(SOCK_STREAM, 31467, 0);
-	destLocal = BRlocal.getsDesc();
-	taille=Expd.getsLen();
+    /*SockDist Expd("0",31466);// pour autotest 31466/31467
+    Sock BRlocal(SOCK_STREAM, 31467, 0);
+    destLocal = BRlocal.getsDesc();
+    taille=Expd.getsLen();
 
-	adresseExp = Expd.getAdrDist();
+    adresseExp = Expd.getAdrDist();
     listen(destLocal, 100);*/
     printf("Démarrage du serveur....\n");
 
+}
+
+void TransfertRapport(int desc,string pseudo)
+{
+    char recup;
+    string envoi;
+    string mes;
+    int cpt=0;
+    char* chemin=(char*)"∕";
+    strcat(chemin,(const char *)pseudo.c_str());
+    strcat(chemin,"/temp.pdf");//construction du chemin pour trouver le rapport qu'il faut transferer
+    FILE * rapport=fopen(chemin, "r");
+    fseek(rapport, 236337, SEEK_SET);//on évite l'image
+    while ((recup=fgetc(rapport))!=EOF)
+    {
+        mes += recup;
+        cpt++;
+        if (cpt == 100)
+        {
+            envoi="transfert_rapport>"+mes;
+            //send(desc,envoi,sizeof(envoi),0);
+            mes="";
+            cpt=0;
+        }
+    }
+    if (pseudo.compare("controleur")==0)
+    {
+        envoi="fin_transfert>controleur";
+        //send(desc,envoi,sizeof(envoi),0);
+    }
 }
 
 vector<string> LectureDansListeFait()
@@ -408,9 +438,9 @@ bool EstDansListeEtablitControleur(string p_pseudo)
  * \param string p_message
  * \return une string correspondant à ce qu'on veut renvoyer
  */
-string Analyse(string p_message)
+string Analyse(string p_message,int desc)
 {
-	//read(mydata->desc1,recu,sizeof recu);
+    //recv(desc,recu,sizeof recu, 0);
     //char* message=recu;
     //string inter=message;
     //printf("Analyse de la trame...\n");
@@ -428,7 +458,6 @@ string Analyse(string p_message)
     if (action.compare("connexion")==0)
     {
         //cout << "Un utilisateur se connecte..." << endl;
-        //fputs ("coucou@",liste_etablit_controleur_fichier);//on fait comme si coucou avait été ajouté par le controleur
         return "connexion...";
     }
     if (action.compare("connexion_employe")==0)
@@ -439,6 +468,10 @@ string Analyse(string p_message)
             {
                 //cout << "Un controleur se connecte..." << endl;
                 controleur_present=true;
+                thread.mondesc=desc;
+                thread.pseudo=transmission;
+                liste_thread.push_back(thread);
+                
                 liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
                 fseek(liste_etablit_controleur_fichier, 0, SEEK_END);
                 if (ftell(liste_etablit_controleur_fichier)==0)
@@ -450,13 +483,15 @@ string Analyse(string p_message)
                 else
                 {
                     cout<< "Liste déjà remplie. . ." << endl;
+                    //send(desc,envoi,sizeof(envoi),0);
                 }
-                return "controleur";
+                return "connexion_controleur>";
             }
             else
             {
                 cout << "Un controleur existe déjà désolé" << endl;
-                return "refuse";
+                //send(this->adresseExp,envoi,sizeof(envoi),0);
+                return "connexion_refuse>";
             }
         }
         
@@ -469,6 +504,10 @@ string Analyse(string p_message)
             {
                 if (EstDansListeEtablitControleur(transmission))
                 {
+                    thread.mondesc=desc;
+                    thread.pseudo=transmission;
+                    liste_thread.push_back(thread);
+                
                     cout << "Bravo vous êtes connectés" << endl;
                     ChercheDansListeEtablitControleur(transmission);
                     transmission+="@";
@@ -476,12 +515,14 @@ string Analyse(string p_message)
                     fputs (transmission.c_str(),lrecf);//transfert dans la liste rapport en cours
                     fclose(lrecf);
                     cout << "Vous êtes un employé au rapport!" << endl;
+                    //send(desc,envoi,sizeof(envoi),0);
                     return "employe";
                 }
                 else
                 {
                     cout << "Vous avez été refusé par le serveur" << endl;
-                    return "refuse";
+                    //send(desc,envoi,sizeof(envoi),0);
+                    return "connexion_refuse>";
                 }
             }
             //mutex 1 (mode unlock)
@@ -501,6 +542,7 @@ string Analyse(string p_message)
         else
         {
             cout << "Désolé le pseudo existe déjà!!" << endl;
+            //send(desc,envoi,sizeof(envoi),0);
         }
     }
     if (action.compare("partie_rapport")==0)
@@ -530,6 +572,7 @@ string Analyse(string p_message)
         for(int i=0;i<temp.size();i++)
         {
             cout << temp[i] << endl;
+            //send(desc,envoi,sizeof(envoi),0);
         }
         return "liste_rapport_fait";
     }
@@ -555,10 +598,13 @@ string Analyse(string p_message)
             else
             {
                 cout << "L'employé n'a pas encore fini d'écrire son rapport" << endl;
+                //send(desc,envoi,sizeof(envoi),0);
                 return "pas_fini";
             }
         }
         cout << "Vous allez recevoir le rapport de: " << transmission << endl;
+        //il faut transférer le rapport au controleur
+        TransfertRapport(desc,"controleur");
         //on enlève du fichier qui contient la liste des rapports qui sont fait
         //mutex 2 mode unlock
          pthread_mutex_unlock(&verrou_acces_liste_fait);
@@ -586,52 +632,15 @@ string Analyse(string p_message)
                 {
                     cout << "On a réussi à ouvrir le rapport mais où?" << endl;
                 }
+                //il faut transférer le rapport à l'employé
+                TransfertRapport(desc,transmission);
             }
         }
         cout << "Un utilisateur ou un controleur se déconnecte" << endl;
-        return "deconnexion";
+        //send(desc,envoi,sizeof(envoi),0);
+        return "deconnexion>";
     }
     return "impossible";
-}
-
-/**
- * \fn string ActionServeur(string p_action)
- * \brief Permet de répondre au client en fonction du message que l'on a eu
- * \param string p_action
- * \return une string correspondant à ce qu'on veut renvoyer
- */
-string ActionServeur(string p_action)
-{
-    string message="";
-    if (p_action.compare("controleur")==0)
-    {
-        message="connexion_controleur>";
-    }
-    if (p_action.compare("employe")==0)
-    {
-        message="connexion_employe>";
-    }
-    if (p_action.compare("refuse")==0)
-    {
-        message="connexion_refuse>";
-    }
-    if (p_action.compare("partie_recue")==0)
-    {
-        message="partie_recue>";
-    }
-    if (p_action.compare("pas_fini")==0)
-    {
-        message="pas_fini";
-    }
-    if (p_action.compare("deconnexion")==0)
-    {
-        message="rapport>";
-    }
-    if (p_action=="impossible")
-    {
-        return p_action;
-    }
-    return message;
 }
 
 /**
@@ -640,13 +649,12 @@ string ActionServeur(string p_action)
  * \param string p_message
  * \return une string correspondant à ce qu'on veut renvoyer
  */
-string LancementServeur(string p_message)
+string LancementServeur(string p_message,int desc)
 {
     // Reception du message
     //printf("On lance le serveur...\n");
     string message=p_message;
-    string action=Analyse(message);
-    return ActionServeur(action);
+    return Analyse(message,desc);
 }
 
 /**
@@ -663,36 +671,33 @@ void* RunServeur(void* p)
     
     cout << "Start run : " << nom << endl;
     cout << "Entrain d'exécuter le client num: " << desc << endl;
-   // sleep(2);
     message="connexion>";
-    while (LancementServeur(message).compare("rapport>")!=0)
+    while (LancementServeur(message,desc).compare("deconnexion>")!=0)
     {
         message="connexion_employe>"+nom;
-        LancementServeur(message);
+        LancementServeur(message,desc);
         
         if (nom.compare("controleur")==0)
         {
             message="ajout_employe>coucou";
-            LancementServeur(message);
+            LancementServeur(message,desc);
             
             message="demande_rapport>coucou";
-            while(LancementServeur(message).compare("pas_fini")==0)
+            while(LancementServeur(message,desc).compare("pas_fini")==0)
             {
                 message="demande_rapport>coucou";
-                //sleep(2);
             }
         }
         else
         {
             message="connexion_employe>coucou";
-            while(LancementServeur(message).compare("refuse")==0)
+            while(LancementServeur(message,desc).compare("refuse")==0)
             {
                 message="connexion_employe>coucou";
-                //sleep(2);
             }
             
             message="partie_rapport>coucou@Coucou Olivier";
-            LancementServeur(message);
+            LancementServeur(message,desc);
         }
         message="deconnexion>"+nom;
         cout << nom << " deconnecté" << endl;
@@ -711,12 +716,17 @@ void AccueilEmploye()
     /*int accueil=accept(destLocal,(struct sockaddr *) adresseExp,&taille);
      if (accueil>=0)
      {
-        thread.mondesc=accueil;
-        thread.descs_cli.push_back(accueil);
-        liste_thread.push_back(thread);
+     * recv(accueil,recu,sizeof recu, 0);
+     * if (Analyse(message,desc).compare("refuse")==0)
+     * {
+     *  send(accueil,envoi,sizeof(envoi),0);
+     * }
+     * else
+     * {
         pthread_create(&threads[nombre_client],NULL,RunServeur,(void*)&liste_thread[nombre_client]);
         nombre_client++;
         printf("Bonjour mon employe...\n");
+     * }
         return true;
      }
      {
@@ -740,6 +750,7 @@ int main(int argc, char** argv)
      while(true)
      {
         AccueilEmploye();
+     * 
      }
     */
     //Premier utilisateur
