@@ -1,59 +1,79 @@
-\hypertarget{_serveur_8cpp}{\section{Référence du fichier Serveur.\-cpp}
-\label{_serveur_8cpp}\index{Serveur.\-cpp@{Serveur.\-cpp}}
+\hypertarget{_serveur_8cpp}{\section{\-Serveur.\-cpp \-File \-Reference}
+\label{_serveur_8cpp}\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}}
 }
 
 
-Programme permettant de lancer le serveur.  
+\-Programme permettant de lancer le serveur.  
 
 
-{\ttfamily \#include \char`\"{}sock.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}sockdist.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}sauvegarde.\-c\char`\"{}}\\*
-{\ttfamily \#include $<$vector$>$}\\*
-{\ttfamily \#include $<$string$>$}\\*
-{\ttfamily \#include $<$errno.\-h$>$}\\*
-{\ttfamily \#include $<$string.\-h$>$}\\*
-{\ttfamily \#include $<$unistd.\-h$>$}\\*
-{\ttfamily \#include $<$pthread.\-h$>$}\\*
-\subsection*{Classes}
+{\ttfamily \#include \char`\"{}sock.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}sockdist.\-h\char`\"{}}\*
+{\ttfamily \#include \char`\"{}sauvegarde.\-c\char`\"{}}\*
+{\ttfamily \#include \char`\"{}sauvegarde.\-h\char`\"{}}\*
+{\ttfamily \#include $<$vector$>$}\*
+{\ttfamily \#include $<$string$>$}\*
+{\ttfamily \#include $<$errno.\-h$>$}\*
+{\ttfamily \#include $<$string.\-h$>$}\*
+{\ttfamily \#include $<$unistd.\-h$>$}\*
+{\ttfamily \#include $<$pthread.\-h$>$}\*
+\subsection*{\-Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structthread__data}{thread\-\_\-data}
 \end{DoxyCompactItemize}
-\subsection*{Fonctions}
+\subsection*{\-Defines}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{_serveur_8cpp_a7272059ce8f76bb7435c851be799d681}{void \hyperlink{_serveur_8cpp_a7272059ce8f76bb7435c851be799d681}{Serveur} ()}\label{_serveur_8cpp_a7272059ce8f76bb7435c851be799d681}
+\hypertarget{_serveur_8cpp_a9d79a76d219761f42fec0618866a452f}{\#define {\bfseries \-L\-I\-S\-T\-E\-\_\-\-E\-T\-A\-B\-L\-I\-T\-\_\-\-C\-O\-N\-T\-R\-O\-L\-E\-U\-R}~\char`\"{}liste\-\_\-etablit\-\_\-controleur\char`\"{}}\label{_serveur_8cpp_a9d79a76d219761f42fec0618866a452f}
 
-\begin{DoxyCompactList}\small\item\em Fonction permettant d'initialisé le serveur. \end{DoxyCompactList}\item 
-int \hyperlink{_serveur_8cpp_a7d804b7b891b8f9a05d363fe4344896d}{Cherche\-Dans\-Liste\-En\-Cours} (string p\-\_\-pseudo)
-\begin{DoxyCompactList}\small\item\em Cherche dans la liste des rapports s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
-int \hyperlink{_serveur_8cpp_acf841da7f5daeda48d7d86e1b45a6e7f}{Cherche\-Dans\-Liste\-Etablit\-Controleur} (string p\-\_\-pseudo)
-\begin{DoxyCompactList}\small\item\em Cherche dans la liste établie par le controleur s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
-int \hyperlink{_serveur_8cpp_a30f40f7283df807b6853631dc165ad5c}{Cherche\-Dans\-Liste\-Fait} (string p\-\_\-pseudo)
-\begin{DoxyCompactList}\small\item\em Cherche dans la liste des rapports qui ont été fait s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
-bool \hyperlink{_serveur_8cpp_a0ec4900c2c94807292234dd32c9ee0a8}{Est\-Dans\-Liste\-Etablit\-Controleur} (string p\-\_\-pseudo)
-\begin{DoxyCompactList}\small\item\em Cherche dans la liste établit par le contrôleur s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
-string \hyperlink{_serveur_8cpp_ae3d13f80d5d3a32e6b9714718ce447e0}{Analyse} (string p\-\_\-message)
-\begin{DoxyCompactList}\small\item\em Permet d'analyser ce qui arrive dans la trame que l'on a reçu. \end{DoxyCompactList}\item 
-string \hyperlink{_serveur_8cpp_a4188ad82765fa91c496f0f72a7ee5a9c}{Action\-Serveur} (string p\-\_\-action)
-\begin{DoxyCompactList}\small\item\em Permet de répondre au client en fonction du message que l'on a eu. \end{DoxyCompactList}\item 
-string \hyperlink{_serveur_8cpp_a3de1805a780477627bc1a3e093773279}{Lancement\-Serveur} (string p\-\_\-message)
-\begin{DoxyCompactList}\small\item\em Permet de recevoir tous les messages. \end{DoxyCompactList}\item 
-void $\ast$ \hyperlink{_serveur_8cpp_a9b762f9d7c83150c1c690a8a5fa604f3}{Run\-Serveur} (void $\ast$p)
-\begin{DoxyCompactList}\small\item\em Permet de gérer plusieurs employés en même temps grâce aux threads. \end{DoxyCompactList}\item 
-\hypertarget{_serveur_8cpp_aa49f98875197a7ffc64375923bfe3943}{void \hyperlink{_serveur_8cpp_aa49f98875197a7ffc64375923bfe3943}{Accueil\-Employe} ()}\label{_serveur_8cpp_aa49f98875197a7ffc64375923bfe3943}
+\item 
+\hypertarget{_serveur_8cpp_a6e92df2ee6fc57923e510c685b835e6b}{\#define {\bfseries \-L\-I\-S\-T\-E\-\_\-\-R\-A\-P\-P\-O\-R\-T\-\_\-\-F\-A\-I\-T}~\char`\"{}liste\-\_\-rapport\-\_\-fait\char`\"{}}\label{_serveur_8cpp_a6e92df2ee6fc57923e510c685b835e6b}
 
-\begin{DoxyCompactList}\small\item\em Permet d'accueillir les employés en les acceptant. \end{DoxyCompactList}\item 
+\item 
+\hypertarget{_serveur_8cpp_a16b4ff15e73a47021989805b10d68a92}{\#define {\bfseries \-L\-I\-S\-T\-E\-\_\-\-R\-A\-P\-P\-O\-R\-T\-\_\-\-E\-N\-C\-O\-U\-R\-S}~\char`\"{}liste\-\_\-rapport\-\_\-encours\char`\"{}}\label{_serveur_8cpp_a16b4ff15e73a47021989805b10d68a92}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{_serveur_8cpp_a7272059ce8f76bb7435c851be799d681}{void \hyperlink{_serveur_8cpp_a7272059ce8f76bb7435c851be799d681}{\-Serveur} ()}\label{_serveur_8cpp_a7272059ce8f76bb7435c851be799d681}
+
+\begin{DoxyCompactList}\small\item\em \-Fonction permettant d'initialisé le serveur. \end{DoxyCompactList}\item 
+void \hyperlink{_serveur_8cpp_a4a6dd361c1a671e4a3036eb760698447}{\-Transfert\-Rapport} (int desc, string pseudo)
+\begin{DoxyCompactList}\small\item\em \-Permet d'envoyer le rapport à l'employé qui a fini son rapport mais également au controleur qui a fait une demande. \end{DoxyCompactList}\item 
+vector$<$ string $>$ \hyperlink{_serveur_8cpp_a98dec3bea161d4251bc192bdc8e6c46a}{\-Lecture\-Dans\-Liste\-Fait} ()
+\begin{DoxyCompactList}\small\item\em \-On veut récupérer tous les employés qui ont fini leur rapport. \end{DoxyCompactList}\item 
+int \hyperlink{_serveur_8cpp_a7d804b7b891b8f9a05d363fe4344896d}{\-Cherche\-Dans\-Liste\-En\-Cours} (string p\-\_\-pseudo)
+\begin{DoxyCompactList}\small\item\em \-Cherche dans le fichier des rapports en cours s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
+int \hyperlink{_serveur_8cpp_acf841da7f5daeda48d7d86e1b45a6e7f}{\-Cherche\-Dans\-Liste\-Etablit\-Controleur} (string p\-\_\-pseudo)
+\begin{DoxyCompactList}\small\item\em \-Cherche dans le fichier établi par le controleur s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
+int \hyperlink{_serveur_8cpp_a30f40f7283df807b6853631dc165ad5c}{\-Cherche\-Dans\-Liste\-Fait} (string p\-\_\-pseudo)
+\begin{DoxyCompactList}\small\item\em \-Cherche dans le fichier des rapports qui ont été fait s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
+bool \hyperlink{_serveur_8cpp_a0ec4900c2c94807292234dd32c9ee0a8}{\-Est\-Dans\-Liste\-Etablit\-Controleur} (string p\-\_\-pseudo)
+\begin{DoxyCompactList}\small\item\em \-Cherche dans le fichier établit par le contrôleur s'il y a p\-\_\-pseudo. \end{DoxyCompactList}\item 
+\hypertarget{_serveur_8cpp_a0ca8d3a24f23f3d4a45aec58b805003b}{string {\bfseries \-Analyse} (string p\-\_\-message, int desc)}\label{_serveur_8cpp_a0ca8d3a24f23f3d4a45aec58b805003b}
+
+\item 
+\hypertarget{_serveur_8cpp_ae1aba2acfffb493087ab6940449f28aa}{string {\bfseries \-Lancement\-Serveur} (string p\-\_\-message, int desc)}\label{_serveur_8cpp_ae1aba2acfffb493087ab6940449f28aa}
+
+\item 
+void $\ast$ \hyperlink{_serveur_8cpp_a9b762f9d7c83150c1c690a8a5fa604f3}{\-Run\-Serveur} (void $\ast$p)
+\begin{DoxyCompactList}\small\item\em \-Permet de gérer plusieurs employés en même temps grâce aux threads. \end{DoxyCompactList}\item 
+\hypertarget{_serveur_8cpp_aa49f98875197a7ffc64375923bfe3943}{void \hyperlink{_serveur_8cpp_aa49f98875197a7ffc64375923bfe3943}{\-Accueil\-Employe} ()}\label{_serveur_8cpp_aa49f98875197a7ffc64375923bfe3943}
+
+\begin{DoxyCompactList}\small\item\em \-Permet d'accueillir les employés en les acceptant à travers notre socket local. \end{DoxyCompactList}\item 
 int \hyperlink{_serveur_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
-\begin{DoxyCompactList}\small\item\em Point d'entré du programme et qui permet de le lancer. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Variables}
+\begin{DoxyCompactList}\small\item\em \-Point d'entré du programme et qui permet de le lancer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Variables}
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{_serveur_8cpp_aa94479d03b3fee7c767be09c49e369e8}{int {\bfseries dest\-Local}}\label{_serveur_8cpp_aa94479d03b3fee7c767be09c49e369e8}
 
 \item 
-\hypertarget{_serveur_8cpp_ab7f63b9b9120361bb3a4b757ef5a325f}{int {\bfseries nombre\-\_\-client} =0}\label{_serveur_8cpp_ab7f63b9b9120361bb3a4b757ef5a325f}
+\hypertarget{_serveur_8cpp_abb2b6f5250c23bf02b16ff10c0c5fc4e}{bool {\bfseries controleur\-\_\-present} = false}\label{_serveur_8cpp_abb2b6f5250c23bf02b16ff10c0c5fc4e}
+
+\item 
+\hypertarget{_serveur_8cpp_ab7f63b9b9120361bb3a4b757ef5a325f}{int {\bfseries nombre\-\_\-client} = 0}\label{_serveur_8cpp_ab7f63b9b9120361bb3a4b757ef5a325f}
 
 \item 
 \hypertarget{_serveur_8cpp_ad65dd953df0f1cbdb6cbef3315e9828c}{sockaddr\-\_\-in $\ast$ {\bfseries adresse\-Exp}}\label{_serveur_8cpp_ad65dd953df0f1cbdb6cbef3315e9828c}
@@ -68,16 +88,13 @@ int \hyperlink{_serveur_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc,
 \hypertarget{_serveur_8cpp_a65fd8dcfa67db7b8203084314c46d53f}{char {\bfseries recu} \mbox{[}100\mbox{]}}\label{_serveur_8cpp_a65fd8dcfa67db7b8203084314c46d53f}
 
 \item 
-\hypertarget{_serveur_8cpp_a82095472adf3b2ebec38aa0a7c1d767b}{vector$<$ int $>$ {\bfseries descripteur\-\_\-cli}}\label{_serveur_8cpp_a82095472adf3b2ebec38aa0a7c1d767b}
+\hypertarget{_serveur_8cpp_a42c2e44bfed1efe2838a0edd6e57f4c0}{\-F\-I\-L\-E $\ast$ {\bfseries liste\-\_\-etablit\-\_\-controleur\-\_\-fichier}}\label{_serveur_8cpp_a42c2e44bfed1efe2838a0edd6e57f4c0}
 
 \item 
-\hypertarget{_serveur_8cpp_aa40f1d38a0c6068d06cbfdf94aef86a6}{vector$<$ string $>$ {\bfseries liste\-\_\-etablit\-\_\-controleur}}\label{_serveur_8cpp_aa40f1d38a0c6068d06cbfdf94aef86a6}
+\hypertarget{_serveur_8cpp_ad5c6ea9102127d65c411405074cd66eb}{pthread\-\_\-mutex\-\_\-t {\bfseries verrou\-\_\-acces\-\_\-liste\-\_\-encours} = \-P\-T\-H\-R\-E\-A\-D\-\_\-\-M\-U\-T\-E\-X\-\_\-\-I\-N\-I\-T\-I\-A\-L\-I\-Z\-E\-R}\label{_serveur_8cpp_ad5c6ea9102127d65c411405074cd66eb}
 
 \item 
-\hypertarget{_serveur_8cpp_a460b2808d3a06c8a79e794e82fbc9921}{vector$<$ string $>$ {\bfseries liste\-\_\-rapport\-\_\-fait}}\label{_serveur_8cpp_a460b2808d3a06c8a79e794e82fbc9921}
-
-\item 
-\hypertarget{_serveur_8cpp_a27df6d5f4ed712667b07b7347a70be87}{vector$<$ string $>$ {\bfseries liste\-\_\-rapport\-\_\-encours}}\label{_serveur_8cpp_a27df6d5f4ed712667b07b7347a70be87}
+\hypertarget{_serveur_8cpp_af5e6e605df2f08eea27e1c28e591f8f9}{pthread\-\_\-mutex\-\_\-t {\bfseries verrou\-\_\-acces\-\_\-liste\-\_\-fait} = \-P\-T\-H\-R\-E\-A\-D\-\_\-\-M\-U\-T\-E\-X\-\_\-\-I\-N\-I\-T\-I\-A\-L\-I\-Z\-E\-R}\label{_serveur_8cpp_af5e6e605df2f08eea27e1c28e591f8f9}
 
 \item 
 \hypertarget{_serveur_8cpp_ac8e874d266e3fd4235fd94a11980692f}{struct \hyperlink{structthread__data}{thread\-\_\-data} {\bfseries thread}}\label{_serveur_8cpp_ac8e874d266e3fd4235fd94a11980692f}
@@ -88,155 +105,112 @@ int \hyperlink{_serveur_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc,
 \end{DoxyCompactItemize}
 
 
-\subsection{Description détaillée}
-Programme permettant de lancer le serveur. \begin{DoxyAuthor}{Auteur}
-Duplouy Olivier Burc Pierre 
+\subsection{\-Detailed \-Description}
+\-Programme permettant de lancer le serveur. \begin{DoxyAuthor}{\-Authors}
+\-Duplouy \-Olivier, \-Burc \-Pierre 
 \end{DoxyAuthor}
-\begin{DoxyVersion}{Version}
-0.\-1 
+\begin{DoxyVersion}{\-Version}
+1.\-0 
 \end{DoxyVersion}
-\begin{DoxyDate}{Date}
+\begin{DoxyDate}{\-Date}
 20 décembre 2012
 \end{DoxyDate}
-Enregistrement de rapports d'activité dans une entreprise 
+\-Enregistrement de rapports d'activité dans une entreprise 
 
-\subsection{Documentation des fonctions}
-\hypertarget{_serveur_8cpp_a4188ad82765fa91c496f0f72a7ee5a9c}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Action\-Serveur@{Action\-Serveur}}
-\index{Action\-Serveur@{Action\-Serveur}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Action\-Serveur}]{\setlength{\rightskip}{0pt plus 5cm}string Action\-Serveur (
-\begin{DoxyParamCaption}
-\item[{string}]{p\-\_\-action}
-\end{DoxyParamCaption}
-)}}\label{_serveur_8cpp_a4188ad82765fa91c496f0f72a7ee5a9c}
-
-
-Permet de répondre au client en fonction du message que l'on a eu. 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em string} & p\-\_\-action \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-une string correspondant à ce qu'on veut renvoyer 
-\end{DoxyReturn}
-\hypertarget{_serveur_8cpp_ae3d13f80d5d3a32e6b9714718ce447e0}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Analyse@{Analyse}}
-\index{Analyse@{Analyse}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Analyse}]{\setlength{\rightskip}{0pt plus 5cm}string Analyse (
-\begin{DoxyParamCaption}
-\item[{string}]{p\-\_\-message}
-\end{DoxyParamCaption}
-)}}\label{_serveur_8cpp_ae3d13f80d5d3a32e6b9714718ce447e0}
-
-
-Permet d'analyser ce qui arrive dans la trame que l'on a reçu. 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em string} & p\-\_\-message \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-une string correspondant à ce qu'on veut renvoyer 
-\end{DoxyReturn}
-\hypertarget{_serveur_8cpp_a7d804b7b891b8f9a05d363fe4344896d}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Cherche\-Dans\-Liste\-En\-Cours@{Cherche\-Dans\-Liste\-En\-Cours}}
-\index{Cherche\-Dans\-Liste\-En\-Cours@{Cherche\-Dans\-Liste\-En\-Cours}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Cherche\-Dans\-Liste\-En\-Cours}]{\setlength{\rightskip}{0pt plus 5cm}int Cherche\-Dans\-Liste\-En\-Cours (
+\subsection{\-Function \-Documentation}
+\hypertarget{_serveur_8cpp_a7d804b7b891b8f9a05d363fe4344896d}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Cherche\-Dans\-Liste\-En\-Cours@{\-Cherche\-Dans\-Liste\-En\-Cours}}
+\index{\-Cherche\-Dans\-Liste\-En\-Cours@{\-Cherche\-Dans\-Liste\-En\-Cours}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Cherche\-Dans\-Liste\-En\-Cours}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Cherche\-Dans\-Liste\-En\-Cours} (
 \begin{DoxyParamCaption}
 \item[{string}]{p\-\_\-pseudo}
 \end{DoxyParamCaption}
 )}}\label{_serveur_8cpp_a7d804b7b891b8f9a05d363fe4344896d}
 
 
-Cherche dans la liste des rapports s'il y a p\-\_\-pseudo. 
+\-Cherche dans le fichier des rapports en cours s'il y a p\-\_\-pseudo. 
 
 
-\begin{DoxyParams}{Paramètres}
+\begin{DoxyParams}{\-Parameters}
 {\em string} & p\-\_\-pseudo \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-l'index i quand on l'a trouvé -\/1 sinon 
+\begin{DoxyReturn}{\-Returns}
+0 quand on l'a trouvé -\/1 sinon 
 \end{DoxyReturn}
-\hypertarget{_serveur_8cpp_acf841da7f5daeda48d7d86e1b45a6e7f}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Cherche\-Dans\-Liste\-Etablit\-Controleur@{Cherche\-Dans\-Liste\-Etablit\-Controleur}}
-\index{Cherche\-Dans\-Liste\-Etablit\-Controleur@{Cherche\-Dans\-Liste\-Etablit\-Controleur}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Cherche\-Dans\-Liste\-Etablit\-Controleur}]{\setlength{\rightskip}{0pt plus 5cm}int Cherche\-Dans\-Liste\-Etablit\-Controleur (
+\hypertarget{_serveur_8cpp_acf841da7f5daeda48d7d86e1b45a6e7f}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Cherche\-Dans\-Liste\-Etablit\-Controleur@{\-Cherche\-Dans\-Liste\-Etablit\-Controleur}}
+\index{\-Cherche\-Dans\-Liste\-Etablit\-Controleur@{\-Cherche\-Dans\-Liste\-Etablit\-Controleur}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Cherche\-Dans\-Liste\-Etablit\-Controleur}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Cherche\-Dans\-Liste\-Etablit\-Controleur} (
 \begin{DoxyParamCaption}
 \item[{string}]{p\-\_\-pseudo}
 \end{DoxyParamCaption}
 )}}\label{_serveur_8cpp_acf841da7f5daeda48d7d86e1b45a6e7f}
 
 
-Cherche dans la liste établie par le controleur s'il y a p\-\_\-pseudo. 
+\-Cherche dans le fichier établi par le controleur s'il y a p\-\_\-pseudo. 
 
 
-\begin{DoxyParams}{Paramètres}
+\begin{DoxyParams}{\-Parameters}
 {\em string} & p\-\_\-pseudo \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-l'index i quand on l'a trouvé -\/1 sinon 
+\begin{DoxyReturn}{\-Returns}
+0 quand on l'a trouvé -\/1 sinon 
 \end{DoxyReturn}
-\hypertarget{_serveur_8cpp_a30f40f7283df807b6853631dc165ad5c}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Cherche\-Dans\-Liste\-Fait@{Cherche\-Dans\-Liste\-Fait}}
-\index{Cherche\-Dans\-Liste\-Fait@{Cherche\-Dans\-Liste\-Fait}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Cherche\-Dans\-Liste\-Fait}]{\setlength{\rightskip}{0pt plus 5cm}int Cherche\-Dans\-Liste\-Fait (
+\hypertarget{_serveur_8cpp_a30f40f7283df807b6853631dc165ad5c}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Cherche\-Dans\-Liste\-Fait@{\-Cherche\-Dans\-Liste\-Fait}}
+\index{\-Cherche\-Dans\-Liste\-Fait@{\-Cherche\-Dans\-Liste\-Fait}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Cherche\-Dans\-Liste\-Fait}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Cherche\-Dans\-Liste\-Fait} (
 \begin{DoxyParamCaption}
 \item[{string}]{p\-\_\-pseudo}
 \end{DoxyParamCaption}
 )}}\label{_serveur_8cpp_a30f40f7283df807b6853631dc165ad5c}
 
 
-Cherche dans la liste des rapports qui ont été fait s'il y a p\-\_\-pseudo. 
+\-Cherche dans le fichier des rapports qui ont été fait s'il y a p\-\_\-pseudo. 
 
 
-\begin{DoxyParams}{Paramètres}
+\begin{DoxyParams}{\-Parameters}
 {\em string} & p\-\_\-pseudo \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-l'index i quand on l'a trouvé -\/1 sinon 
+\begin{DoxyReturn}{\-Returns}
+0 quand on l'a trouvé -\/1 sinon 
 \end{DoxyReturn}
-\hypertarget{_serveur_8cpp_a0ec4900c2c94807292234dd32c9ee0a8}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Est\-Dans\-Liste\-Etablit\-Controleur@{Est\-Dans\-Liste\-Etablit\-Controleur}}
-\index{Est\-Dans\-Liste\-Etablit\-Controleur@{Est\-Dans\-Liste\-Etablit\-Controleur}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Est\-Dans\-Liste\-Etablit\-Controleur}]{\setlength{\rightskip}{0pt plus 5cm}bool Est\-Dans\-Liste\-Etablit\-Controleur (
+\hypertarget{_serveur_8cpp_a0ec4900c2c94807292234dd32c9ee0a8}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Est\-Dans\-Liste\-Etablit\-Controleur@{\-Est\-Dans\-Liste\-Etablit\-Controleur}}
+\index{\-Est\-Dans\-Liste\-Etablit\-Controleur@{\-Est\-Dans\-Liste\-Etablit\-Controleur}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Est\-Dans\-Liste\-Etablit\-Controleur}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Est\-Dans\-Liste\-Etablit\-Controleur} (
 \begin{DoxyParamCaption}
 \item[{string}]{p\-\_\-pseudo}
 \end{DoxyParamCaption}
 )}}\label{_serveur_8cpp_a0ec4900c2c94807292234dd32c9ee0a8}
 
 
-Cherche dans la liste établit par le contrôleur s'il y a p\-\_\-pseudo. 
+\-Cherche dans le fichier établit par le contrôleur s'il y a p\-\_\-pseudo. 
 
 
-\begin{DoxyParams}{Paramètres}
+\begin{DoxyParams}{\-Parameters}
 {\em string} & p\-\_\-pseudo \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-vrai si p\-\_\-pseudo est présent dans la liste établie par le controleur 
+\begin{DoxyReturn}{\-Returns}
+vrai si p\-\_\-pseudo est présent dans le fichier établit par le controleur 
 \end{DoxyReturn}
-\hypertarget{_serveur_8cpp_a3de1805a780477627bc1a3e093773279}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Lancement\-Serveur@{Lancement\-Serveur}}
-\index{Lancement\-Serveur@{Lancement\-Serveur}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Lancement\-Serveur}]{\setlength{\rightskip}{0pt plus 5cm}string Lancement\-Serveur (
+\hypertarget{_serveur_8cpp_a98dec3bea161d4251bc192bdc8e6c46a}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Lecture\-Dans\-Liste\-Fait@{\-Lecture\-Dans\-Liste\-Fait}}
+\index{\-Lecture\-Dans\-Liste\-Fait@{\-Lecture\-Dans\-Liste\-Fait}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Lecture\-Dans\-Liste\-Fait}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ string $>$ {\bf \-Lecture\-Dans\-Liste\-Fait} (
 \begin{DoxyParamCaption}
-\item[{string}]{p\-\_\-message}
+{}
 \end{DoxyParamCaption}
-)}}\label{_serveur_8cpp_a3de1805a780477627bc1a3e093773279}
+)}}\label{_serveur_8cpp_a98dec3bea161d4251bc192bdc8e6c46a}
 
 
-Permet de recevoir tous les messages. 
+\-On veut récupérer tous les employés qui ont fini leur rapport. 
 
-
-\begin{DoxyParams}{Paramètres}
-{\em string} & p\-\_\-message \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-une string correspondant à ce qu'on veut renvoyer 
+\begin{DoxyReturn}{\-Returns}
+renvoi la liste de tous les employés ayant fini leur rapport 
 \end{DoxyReturn}
-\hypertarget{_serveur_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{\index{Serveur.\-cpp@{Serveur.\-cpp}!main@{main}}
-\index{main@{main}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\hypertarget{_serveur_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!main@{main}}
+\index{main@{main}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf main} (
 \begin{DoxyParamCaption}
 \item[{int}]{argc, }
 \item[{char $\ast$$\ast$}]{argv}
@@ -244,32 +218,49 @@ une string correspondant à ce qu'on veut renvoyer
 )}}\label{_serveur_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
 
 
-Point d'entré du programme et qui permet de le lancer. 
+\-Point d'entré du programme et qui permet de le lancer. 
 
 
-\begin{DoxyParams}{Paramètres}
+\begin{DoxyParams}{\-Parameters}
 {\em int} & argc, char$\ast$$\ast$ argv \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
+\begin{DoxyReturn}{\-Returns}
 0 si ça s'est bien passé 
 \end{DoxyReturn}
-\hypertarget{_serveur_8cpp_a9b762f9d7c83150c1c690a8a5fa604f3}{\index{Serveur.\-cpp@{Serveur.\-cpp}!Run\-Serveur@{Run\-Serveur}}
-\index{Run\-Serveur@{Run\-Serveur}!Serveur.cpp@{Serveur.\-cpp}}
-\subsubsection[{Run\-Serveur}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ Run\-Serveur (
+\hypertarget{_serveur_8cpp_a9b762f9d7c83150c1c690a8a5fa604f3}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Run\-Serveur@{\-Run\-Serveur}}
+\index{\-Run\-Serveur@{\-Run\-Serveur}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Run\-Serveur}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ {\bf \-Run\-Serveur} (
 \begin{DoxyParamCaption}
 \item[{void $\ast$}]{p}
 \end{DoxyParamCaption}
 )}}\label{_serveur_8cpp_a9b762f9d7c83150c1c690a8a5fa604f3}
 
 
-Permet de gérer plusieurs employés en même temps grâce aux threads. 
+\-Permet de gérer plusieurs employés en même temps grâce aux threads. 
 
 
-\begin{DoxyParams}{Paramètres}
+\begin{DoxyParams}{\-Parameters}
 {\em void$\ast$} & p \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
+\begin{DoxyReturn}{\-Returns}
 si ça s'est bien passé ou non 
 \end{DoxyReturn}
+\hypertarget{_serveur_8cpp_a4a6dd361c1a671e4a3036eb760698447}{\index{\-Serveur.\-cpp@{\-Serveur.\-cpp}!\-Transfert\-Rapport@{\-Transfert\-Rapport}}
+\index{\-Transfert\-Rapport@{\-Transfert\-Rapport}!Serveur.cpp@{\-Serveur.\-cpp}}
+\subsubsection[{\-Transfert\-Rapport}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Transfert\-Rapport} (
+\begin{DoxyParamCaption}
+\item[{int}]{desc, }
+\item[{string}]{pseudo}
+\end{DoxyParamCaption}
+)}}\label{_serveur_8cpp_a4a6dd361c1a671e4a3036eb760698447}
+
+
+\-Permet d'envoyer le rapport à l'employé qui a fini son rapport mais également au controleur qui a fait une demande. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em int} & desc,string pseudo \\
+\hline
+\end{DoxyParams}

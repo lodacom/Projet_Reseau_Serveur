@@ -2,37 +2,103 @@
 <Tokens version="1.0">
   <Token>
     <TokenIdentifier>
-      <Name>md_README</Name>
-      <APILanguage>markdown</APILanguage>
-    </TokenIdentifier>
-    <Path>md__r_e_a_d_m_e.html</Path>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>AnalyseurTrame</Name>
-      <APILanguage>c</APILanguage>
-      <Type>cl</Type>
-      <Scope>AnalyseurTrame</Scope>
-    </TokenIdentifier>
-    <Path>class_analyseur_trame.html</Path>
-  </Token>
-  <Token>
-    <TokenIdentifier>
       <Name>Serveur</Name>
       <APILanguage>c</APILanguage>
-      <Type>cl</Type>
-      <Scope>Serveur</Scope>
+      <Type>func</Type>
     </TokenIdentifier>
-    <Path>class_serveur.html</Path>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a7272059ce8f76bb7435c851be799d681</Anchor>
+    <Abstract>Fonction permettant d&amp;#39;initialisé le serveur.</Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
-      <Name>Serveur::thread_data</Name>
+      <Name>TransfertRapport</Name>
       <APILanguage>c</APILanguage>
-      <Type>cl</Type>
-      <Scope>Serveur::thread_data</Scope>
+      <Type>func</Type>
     </TokenIdentifier>
-    <Path>struct_serveur_1_1thread__data.html</Path>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a4a6dd361c1a671e4a3036eb760698447</Anchor>
+    <Abstract>Permet d&amp;#39;envoyer le rapport à l&amp;#39;employé qui a fini son rapport mais également au controleur qui a fai...</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>LectureDansListeFait</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a98dec3bea161d4251bc192bdc8e6c46a</Anchor>
+    <Abstract>On veut récupérer tous les employés qui ont fini leur rapport.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ChercheDansListeEnCours</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a7d804b7b891b8f9a05d363fe4344896d</Anchor>
+    <Abstract>Cherche dans le fichier des rapports en cours s&amp;#39;il y a p_pseudo.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ChercheDansListeEtablitControleur</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>acf841da7f5daeda48d7d86e1b45a6e7f</Anchor>
+    <Abstract>Cherche dans le fichier établi par le controleur s&amp;#39;il y a p_pseudo.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ChercheDansListeFait</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a30f40f7283df807b6853631dc165ad5c</Anchor>
+    <Abstract>Cherche dans le fichier des rapports qui ont été fait s&amp;#39;il y a p_pseudo.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>EstDansListeEtablitControleur</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a0ec4900c2c94807292234dd32c9ee0a8</Anchor>
+    <Abstract>Cherche dans le fichier établit par le contrôleur s&amp;#39;il y a p_pseudo.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>RunServeur</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a9b762f9d7c83150c1c690a8a5fa604f3</Anchor>
+    <Abstract>Permet de gérer plusieurs employés en même temps grâce aux threads.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>AccueilEmploye</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>aa49f98875197a7ffc64375923bfe3943</Anchor>
+    <Abstract>Permet d&amp;#39;accueillir les employés en les acceptant à travers notre socket local.</Abstract>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>main</Name>
+      <APILanguage>c</APILanguage>
+      <Type>func</Type>
+    </TokenIdentifier>
+    <Path>_serveur_8cpp.html</Path>
+    <Anchor>a3c04138a5bfe5d72780bb7e82a18e627</Anchor>
+    <Abstract>Point d&amp;#39;entré du programme et qui permet de le lancer.</Abstract>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -51,5 +117,14 @@
       <Scope>SockDist</Scope>
     </TokenIdentifier>
     <Path>class_sock_dist.html</Path>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>thread_data</Name>
+      <APILanguage>c</APILanguage>
+      <Type>cl</Type>
+      <Scope>thread_data</Scope>
+    </TokenIdentifier>
+    <Path>structthread__data.html</Path>
   </Token>
 </Tokens>

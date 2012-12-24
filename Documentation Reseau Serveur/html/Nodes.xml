@@ -5,171 +5,11 @@
       <Name>Root</Name>
       <Path>index.html</Path>
       <Subnodes>
-       <Node>
-        <Name>README</Name>
-        <Path>md__r_e_a_d_m_e.html</Path>
-       </Node>
-       <Node>
-        <Name>Classes</Name>
-        <Path></Path>
         <Subnodes>
          <Node>
-          <Name>Liste des classes</Name>
+          <Name>Class List</Name>
           <Path>annotated.html</Path>
           <Subnodes>
-           <Node>
-            <Name>AnalyseurTrame</Name>
-            <Path>class_analyseur_trame.html</Path>
-            <Subnodes>
-             <Node>
-              <Name>AnalyseurTrame</Name>
-              <Path>class_analyseur_trame.html</Path>
-              <Anchor>abe62cc4a2f68bd1c1d777363e2b4cb65</Anchor>
-             </Node>
-             <Node>
-              <Name>~AnalyseurTrame</Name>
-              <Path>class_analyseur_trame.html</Path>
-              <Anchor>ac09780ac1e31242d8cd3208e547cf8fe</Anchor>
-             </Node>
-             <Node>
-              <Name>Analyse</Name>
-              <Path>class_analyseur_trame.html</Path>
-              <Anchor>a44c4888e43a39bf8295eda4872070948</Anchor>
-             </Node>
-             <Node>
-              <Name>recu</Name>
-              <Path>class_analyseur_trame.html</Path>
-              <Anchor>a13079899ad6b9c2af3835ffd71f71e08</Anchor>
-             </Node>
-             <Node>
-              <Name>tp</Name>
-              <Path>class_analyseur_trame.html</Path>
-              <Anchor>a92ecc1f6adb0d26bf21e7e6575107a74</Anchor>
-             </Node>
-            </Subnodes>
-           </Node>
-           <Node>
-            <Name>Serveur</Name>
-            <Path>class_serveur.html</Path>
-            <Subnodes>
-             <Node>
-              <Name>thread_data</Name>
-              <Path>struct_serveur_1_1thread__data.html</Path>
-              <Subnodes>
-               <Node>
-                <Name>descs_cli</Name>
-                <Path>struct_serveur_1_1thread__data.html</Path>
-                <Anchor>a3a44b675cc9e6cb69a875ce58103f31f</Anchor>
-               </Node>
-               <Node>
-                <Name>mondesc</Name>
-                <Path>struct_serveur_1_1thread__data.html</Path>
-                <Anchor>a95c4d2ea7693fd200e97515034d24d43</Anchor>
-               </Node>
-              </Subnodes>
-             </Node>
-             <Node>
-              <Name>Serveur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a8a7a1df15a07e095436dedd0d40a0196</Anchor>
-             </Node>
-             <Node>
-              <Name>~Serveur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a722aefd65c9efab0b3e0646bf3440ea1</Anchor>
-             </Node>
-             <Node>
-              <Name>AccueilEmploye</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a4ebd92717a7ee46a363f5c1816a99f56</Anchor>
-             </Node>
-             <Node>
-              <Name>ActionServeur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>abc20e0793f7907e8d8b1596f6046aa47</Anchor>
-             </Node>
-             <Node>
-              <Name>Analyse</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a770b3b736207e2e0f4e99a44e6dbfbcf</Anchor>
-             </Node>
-             <Node>
-              <Name>ChercheDansListeEtablitControleur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a1d08a6af05112c72e679f9e2c7223850</Anchor>
-             </Node>
-             <Node>
-              <Name>Ecoute</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>af4e624ed5818b967f99c5abbc966212c</Anchor>
-             </Node>
-             <Node>
-              <Name>EstDansListeEtablitControleur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a5950c36f0775a3c5b01f22ceaa443171</Anchor>
-             </Node>
-             <Node>
-              <Name>LancementServeur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a5b54a380c06fa431c7adb18b6b7b9eda</Anchor>
-             </Node>
-             <Node>
-              <Name>RedigeRapport</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a36263ad96b1619d079ec49c54773496f</Anchor>
-             </Node>
-             <Node>
-              <Name>adresseExp</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a745aeefe5b63991eefffb6b1b79762f4</Anchor>
-             </Node>
-             <Node>
-              <Name>descripteur_cli</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a350976885f84b87f2c6533b4b327a867</Anchor>
-             </Node>
-             <Node>
-              <Name>destLocal</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a606f8c26e8ddeba7bb84e8661525e37f</Anchor>
-             </Node>
-             <Node>
-              <Name>envoi</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a1abee959761a58815f7878483c635fa5</Anchor>
-             </Node>
-             <Node>
-              <Name>liste_etablit_controleur</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a0b74dc824f0b93f9fd141723c46033d2</Anchor>
-             </Node>
-             <Node>
-              <Name>liste_rapport_encours</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>ac7776debc1b77647886d34bad7d39580</Anchor>
-             </Node>
-             <Node>
-              <Name>liste_rapport_fait</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a7e782ca7679ec1a84dd79ac36a214df6</Anchor>
-             </Node>
-             <Node>
-              <Name>liste_thread</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>abc61f04a941acabe63665a6147321c04</Anchor>
-             </Node>
-             <Node>
-              <Name>taille</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>a03c8b41efd2a24cceefe748f3986dc88</Anchor>
-             </Node>
-             <Node>
-              <Name>threads</Name>
-              <Path>class_serveur.html</Path>
-              <Anchor>ab55a69165d516980da7587b35f67584a</Anchor>
-             </Node>
-            </Subnodes>
-           </Node>
            <Node>
             <Name>Sock</Name>
             <Path>class_sock.html</Path>
@@ -247,41 +87,188 @@
              </Node>
             </Subnodes>
            </Node>
+           <Node>
+            <Name>thread_data</Name>
+            <Path>structthread__data.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>mondesc</Name>
+              <Path>structthread__data.html</Path>
+              <Anchor>aa2a4c9277a3ef6de228eba6e78dbc4ab</Anchor>
+             </Node>
+             <Node>
+              <Name>pseudo</Name>
+              <Path>structthread__data.html</Path>
+              <Anchor>affe70da9a434125d207b360dc6515bf5</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
           </Subnodes>
          </Node>
          <Node>
-          <Name>Index des classes</Name>
+          <Name>Class Index</Name>
           <Path>classes.html</Path>
          </Node>
         </Subnodes>
-       </Node>
-       <Node>
-        <Name>Fichiers</Name>
-        <Path></Path>
         <Subnodes>
          <Node>
-          <Name>Liste des fichiers</Name>
+          <Name>File List</Name>
           <Path>files.html</Path>
           <Subnodes>
            <Node>
-            <Name>AnalyseurTrame.h</Name>
-            <Path>_analyseur_trame_8h_source.html</Path>
+            <Name>Serveur.cpp</Name>
+            <Path>_serveur_8cpp.html</Path>
+            <Subnodes>
+             <Node>
+              <Name>LISTE_ETABLIT_CONTROLEUR</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a9d79a76d219761f42fec0618866a452f</Anchor>
+             </Node>
+             <Node>
+              <Name>LISTE_RAPPORT_ENCOURS</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a16b4ff15e73a47021989805b10d68a92</Anchor>
+             </Node>
+             <Node>
+              <Name>LISTE_RAPPORT_FAIT</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a6e92df2ee6fc57923e510c685b835e6b</Anchor>
+             </Node>
+             <Node>
+              <Name>AccueilEmploye</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>aa49f98875197a7ffc64375923bfe3943</Anchor>
+             </Node>
+             <Node>
+              <Name>Analyse</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a0ca8d3a24f23f3d4a45aec58b805003b</Anchor>
+             </Node>
+             <Node>
+              <Name>ChercheDansListeEnCours</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a7d804b7b891b8f9a05d363fe4344896d</Anchor>
+             </Node>
+             <Node>
+              <Name>ChercheDansListeEtablitControleur</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>acf841da7f5daeda48d7d86e1b45a6e7f</Anchor>
+             </Node>
+             <Node>
+              <Name>ChercheDansListeFait</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a30f40f7283df807b6853631dc165ad5c</Anchor>
+             </Node>
+             <Node>
+              <Name>EstDansListeEtablitControleur</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a0ec4900c2c94807292234dd32c9ee0a8</Anchor>
+             </Node>
+             <Node>
+              <Name>LancementServeur</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>ae1aba2acfffb493087ab6940449f28aa</Anchor>
+             </Node>
+             <Node>
+              <Name>LectureDansListeFait</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a98dec3bea161d4251bc192bdc8e6c46a</Anchor>
+             </Node>
+             <Node>
+              <Name>main</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a3c04138a5bfe5d72780bb7e82a18e627</Anchor>
+             </Node>
+             <Node>
+              <Name>RunServeur</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a9b762f9d7c83150c1c690a8a5fa604f3</Anchor>
+             </Node>
+             <Node>
+              <Name>Serveur</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a7272059ce8f76bb7435c851be799d681</Anchor>
+             </Node>
+             <Node>
+              <Name>TransfertRapport</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a4a6dd361c1a671e4a3036eb760698447</Anchor>
+             </Node>
+             <Node>
+              <Name>adresseExp</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>ad65dd953df0f1cbdb6cbef3315e9828c</Anchor>
+             </Node>
+             <Node>
+              <Name>controleur_present</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>abb2b6f5250c23bf02b16ff10c0c5fc4e</Anchor>
+             </Node>
+             <Node>
+              <Name>destLocal</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>aa94479d03b3fee7c767be09c49e369e8</Anchor>
+             </Node>
+             <Node>
+              <Name>envoi</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>af9dd1e168a677b76ee41b85bca44530d</Anchor>
+             </Node>
+             <Node>
+              <Name>liste_etablit_controleur_fichier</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a42c2e44bfed1efe2838a0edd6e57f4c0</Anchor>
+             </Node>
+             <Node>
+              <Name>liste_thread</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>ada7e6c9944c431477bcf47f2e2ef27f4</Anchor>
+             </Node>
+             <Node>
+              <Name>nombre_client</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>ab7f63b9b9120361bb3a4b757ef5a325f</Anchor>
+             </Node>
+             <Node>
+              <Name>recu</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>a65fd8dcfa67db7b8203084314c46d53f</Anchor>
+             </Node>
+             <Node>
+              <Name>taille</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>aa38712007f1072b88bcb85086db02cec</Anchor>
+             </Node>
+             <Node>
+              <Name>thread</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>ac8e874d266e3fd4235fd94a11980692f</Anchor>
+             </Node>
+             <Node>
+              <Name>verrou_acces_liste_encours</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>ad5c6ea9102127d65c411405074cd66eb</Anchor>
+             </Node>
+             <Node>
+              <Name>verrou_acces_liste_fait</Name>
+              <Path>_serveur_8cpp.html</Path>
+              <Anchor>af5e6e605df2f08eea27e1c28e591f8f9</Anchor>
+             </Node>
+            </Subnodes>
+           </Node>
+          </Subnodes>
+         </Node>
+         <Node>
+          <Name>File Members</Name>
+          <Path>globals.html</Path>
+          <Subnodes>
+           <Node>
+            <Name>All</Name>
+            <Path>globals.html</Path>
            </Node>
            <Node>
-            <Name>sauvegarde.h</Name>
-            <Path>sauvegarde_8h_source.html</Path>
-           </Node>
-           <Node>
-            <Name>Serveur.h</Name>
-            <Path>_serveur_8h_source.html</Path>
-           </Node>
-           <Node>
-            <Name>sock.h</Name>
-            <Path>sock_8h_source.html</Path>
-           </Node>
-           <Node>
-            <Name>sockdist.h</Name>
-            <Path>sockdist_8h_source.html</Path>
+            <Name>Functions</Name>
+            <Path>globals_func.html</Path>
            </Node>
           </Subnodes>
          </Node>
