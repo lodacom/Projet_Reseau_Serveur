@@ -12,6 +12,7 @@
 #include "sock.h"
 #include "sockdist.h"
 #include "sauvegarde.c"
+#include "sauvegarde.h"
 #include <vector>
 #include <string>
 #include <errno.h>
@@ -565,16 +566,45 @@ string Analyse(string p_message,int desc)
         string pseudo=transmission.substr(0,i);
         cout << "L'employé: " << pseudo << " écrit..." << endl;
         string mess=transmission.substr(i+1,transmission.length());
-        if (Ecrit(mess.c_str(), pseudo.c_str())==-1)
+        
+        char* chemin=(char*)"/Rapports_Clients/";
+        strcat(chemin,(const char *)pseudo.c_str());//on crée une sauvegarde pour chaque employé
+        FILE* verif=fopen(chemin,"r");
+        fseek(verif, 0, SEEK_END);
+        if (ftell(verif)!=0)
         {
-            cout << "Y a eu un truc qui s'est passé!!" << endl;
+            fclose(verif);
+            FILE* rapport=fopen(chemin,"a");
+            fputs (mess.c_str(),rapport);
+            fclose(rapport);
         }
         else
         {
-            cout << "Sa à l'air bon......" << endl;
+            fclose(verif);
+            FILE* rapport=fopen(chemin,"w");
+            fputs (mess.c_str(),rapport);
+            fclose(rapport);
         }
-        cout << "On écrit le rapport..." << endl;
+        
+        
+        cout << "On sauvegarde la partie que l'on a reçu..." << endl;
         return "partie_recue";
+    }
+    if (action.compare("fin_section")==0)
+    {
+        char* chemin=(char*)"/Rapports_Clients/";
+        strcat(chemin,(const char *)transmission.c_str());//on crée une sauvegarde pour chaque employé
+        FILE* recopie=fopen(chemin,"r");
+        fseek(recopie, 0, SEEK_END);
+        int taille=ftell(recopie);
+        fseek(recopie, 0, SEEK_SET);
+        char* recup;
+        fgets(recup,taille,recopie);//on recupère tout en un seul coup
+        Ecrit(recup,transmission.c_str());//on copie
+        fclose(recopie);
+        FILE* efface=fopen(chemin,"w");//on efface tout après recopie
+        fclose(efface);
+        return "fin_section";
     }
     if (action.compare("demande_liste_rapport_fait")==0)
     {
