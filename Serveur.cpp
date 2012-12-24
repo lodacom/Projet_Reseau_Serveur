@@ -1,8 +1,8 @@
 /*!
  * \file Serveur.cpp
  * \brief Programme permettant de lancer le serveur
- * \author Duplouy Olivier Burc Pierre
- * \version 0.1
+ * \authors Duplouy Olivier, Burc Pierre
+ * \version 1.0
  * \date 20 décembre 2012
  *
  * Enregistrement de rapports d'activité dans une entreprise
@@ -44,19 +44,19 @@ struct thread_data
     string pseudo;//pseudo de l'employé qui s'est connecté
 }thread;
 vector<thread_data> liste_thread;
-
+vector<pthread_t> mesthreads;
 /**
  * \brief Fonction permettant d'initialisé le serveur 
  */
 void Serveur()
 {
-    /*SockDist Expd("0",31466);// pour autotest 31466/31467
+    SockDist Expd("0",31466);// pour autotest 31466/31467
     Sock BRlocal(SOCK_STREAM, 31467, 0);
     destLocal = BRlocal.getsDesc();
     taille=Expd.getsLen();
 
     adresseExp = Expd.getAdrDist();
-    listen(destLocal, 100);*/
+    listen(destLocal, 100);
     printf("Démarrage du serveur....\n");
 
 }
@@ -84,7 +84,7 @@ void TransfertRapport(int desc,string pseudo)
         if (cpt == 100)
         {
             envoi="transfert_rapport>"+mes;
-            //send(desc,envoi,sizeof(envoi),0);
+            send(desc,(const void *)envoi.c_str(),sizeof(envoi),0);
             mes="";
             cpt=0;
         }
@@ -92,7 +92,7 @@ void TransfertRapport(int desc,string pseudo)
     if (pseudo.compare("controleur")==0)
     {
         envoi="fin_transfert>controleur";
-        //send(desc,envoi,sizeof(envoi),0);
+        send(desc,(const void *)envoi.c_str(),sizeof(envoi),0);
     }
 }
 
@@ -130,9 +130,9 @@ vector<string> LectureDansListeFait()
 
 /**
  * \fn int ChercheDansListeEnCours(string p_pseudo)
- * \brief Cherche dans la liste des rapports s'il y a p_pseudo
+ * \brief Cherche dans le fichier des rapports en cours s'il y a p_pseudo
  * \param string p_pseudo
- * \return l'index i quand on l'a trouvé -1 sinon
+ * \return 0 quand on l'a trouvé -1 sinon
  */
 int ChercheDansListeEnCours(string p_pseudo)
 {
@@ -213,9 +213,9 @@ int ChercheDansListeEnCours(string p_pseudo)
 
 /**
  * \fn int ChercheDansListeEtablitControleur(string p_pseudo)
- * \brief Cherche dans la liste établie par le controleur s'il y a p_pseudo
+ * \brief Cherche dans le fichier établi par le controleur s'il y a p_pseudo
  * \param string p_pseudo
- * \return l'index i quand on l'a trouvé -1 sinon
+ * \return 0 quand on l'a trouvé -1 sinon
  */
 int ChercheDansListeEtablitControleur(string p_pseudo)
 {
@@ -298,9 +298,9 @@ int ChercheDansListeEtablitControleur(string p_pseudo)
 
 /**
  * \fn int ChercheDansListeFait(string p_pseudo)
- * \brief Cherche dans la liste des rapports qui ont été fait s'il y a p_pseudo
+ * \brief Cherche dans le fichier des rapports qui ont été fait s'il y a p_pseudo
  * \param string p_pseudo
- * \return l'index i quand on l'a trouvé -1 sinon
+ * \return 0 quand on l'a trouvé -1 sinon
  */
 int ChercheDansListeFait(string p_pseudo)
 {
@@ -381,9 +381,9 @@ int ChercheDansListeFait(string p_pseudo)
 
 /**
  * \fn bool EstDansListeEtablitControleur(string p_pseudo)
- * \brief Cherche dans la liste établit par le contrôleur s'il y a p_pseudo
+ * \brief Cherche dans le fichier établit par le contrôleur s'il y a p_pseudo
  * \param string p_pseudo
- * \return vrai si p_pseudo est présent dans la liste établie par le controleur
+ * \return vrai si p_pseudo est présent dans le fichier établit par le controleur
  */
 bool EstDansListeEtablitControleur(string p_pseudo)
 {
@@ -466,11 +466,6 @@ string Analyse(string p_message,int desc)
     //cout << "La trame a été analysée avec action: "<< action << " et message: " << transmission << endl;
     
     //printf("On décide de ce qu'on va faire\n");
-    if (action.compare("connexion")==0)
-    {
-        //cout << "Un utilisateur se connecte..." << endl;
-        return "connexion...";
-    }
     if (action.compare("connexion_employe")==0)
     {
         if (transmission.compare("controleur")==0)
@@ -479,9 +474,6 @@ string Analyse(string p_message,int desc)
             {
                 //cout << "Un controleur se connecte..." << endl;
                 controleur_present=true;
-                thread.mondesc=desc;
-                thread.pseudo=transmission;
-                liste_thread.push_back(thread);
                 
                 liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
                 fseek(liste_etablit_controleur_fichier, 0, SEEK_END);
@@ -493,15 +485,17 @@ string Analyse(string p_message,int desc)
                 }
                 else
                 {
-                    cout<< "Liste déjà remplie. . ." << endl;
-                    //send(desc,envoi,sizeof(envoi),0);
+                    //cout<< "Liste déjà remplie. . ." << endl;
+                    string rep="reponse>La liste est déjà remplie";
+                    send(desc,(const void *)rep.c_str(),sizeof(rep),0);
                 }
-                return "connexion_controleur>";
+                return transmission;
             }
             else
             {
-                cout << "Un controleur existe déjà désolé" << endl;
-                //send(this->adresseExp,envoi,sizeof(envoi),0);
+                //cout << "Un controleur existe déjà désolé" << endl;
+                string rep="reponse>Désolé un controleur s'est déjà connecté";
+                send(desc,(const void *)rep.c_str(),sizeof(rep),0);
                 return "connexion_refuse>";
             }
         }
@@ -515,24 +509,22 @@ string Analyse(string p_message,int desc)
             {
                 if (EstDansListeEtablitControleur(transmission))
                 {
-                    thread.mondesc=desc;
-                    thread.pseudo=transmission;
-                    liste_thread.push_back(thread);
-                
                     cout << "Bravo vous êtes connectés" << endl;
                     ChercheDansListeEtablitControleur(transmission);
                     transmission+="@";
                     FILE* lrecf=fopen(LISTE_RAPPORT_ENCOURS, "a");
                     fputs (transmission.c_str(),lrecf);//transfert dans la liste rapport en cours
                     fclose(lrecf);
-                    cout << "Vous êtes un employé au rapport!" << endl;
-                    //send(desc,envoi,sizeof(envoi),0);
-                    return "employe";
+                    //cout << "Vous êtes un employé au rapport!" << endl;
+                    string connect="connexion_employe>";
+                    send(desc,(const void *)connect.c_str(),sizeof(connect),0);
+                    return transmission;//on retourne l'employé qui a été connecté
                 }
                 else
                 {
                     cout << "Vous avez été refusé par le serveur" << endl;
-                    //send(desc,envoi,sizeof(envoi),0);
+                    string refus="connexion_refuse>";
+                    send(desc,(const void *)refus.c_str(),sizeof(refus),0);
                     return "connexion_refuse>";
                 }
             }
@@ -552,8 +544,9 @@ string Analyse(string p_message,int desc)
         }
         else
         {
-            cout << "Désolé le pseudo existe déjà!!" << endl;
-            //send(desc,envoi,sizeof(envoi),0);
+            //cout << "Désolé le pseudo existe déjà!!" << endl;
+            string rep="reponse>Vous devez choisir un pseudo différent "+transmission+" existe déjà";
+            send(desc,(const void *)rep.c_str(),sizeof(rep),0);
         }
     }
     if (action.compare("partie_rapport")==0)
@@ -611,8 +604,9 @@ string Analyse(string p_message,int desc)
         vector<string> temp=LectureDansListeFait();
         for(int i=0;i<temp.size();i++)
         {
-            cout << temp[i] << endl;
-            //send(desc,envoi,sizeof(envoi),0);
+            //cout << temp[i] << endl;
+            string liste="liste_rapport_fait>"+temp[i];
+            send(desc,(const void *)liste.c_str(),sizeof(liste),0);
         }
         return "liste_rapport_fait";
     }
@@ -637,8 +631,9 @@ string Analyse(string p_message,int desc)
             }
             else
             {
-                cout << "L'employé n'a pas encore fini d'écrire son rapport" << endl;
-                //send(desc,envoi,sizeof(envoi),0);
+                //cout << "L'employé n'a pas encore fini d'écrire son rapport" << endl;
+                string rep="reponse>Désolé mais "+transmission+" n'a pas encore fini d'écrire";
+                send(desc,(const void *)rep.c_str(),sizeof(rep),0);
                 return "pas_fini";
             }
         }
@@ -676,8 +671,9 @@ string Analyse(string p_message,int desc)
                 TransfertRapport(desc,transmission);
             }
         }
-        cout << "Un utilisateur ou un controleur se déconnecte" << endl;
-        //send(desc,envoi,sizeof(envoi),0);
+        //cout << "Un utilisateur ou un controleur se déconnecte" << endl;
+        string deconnec="deconnexion>"+transmission;
+        send(desc,(const void *)deconnec.c_str(),sizeof(deconnec),0);
         return "deconnexion>";
     }
     return "impossible";
@@ -695,6 +691,30 @@ string LancementServeur(string p_message,int desc)
     //printf("On lance le serveur...\n");
     string message=p_message;
     return Analyse(message,desc);
+}
+
+/**
+ * \fn int EnleveEmploye(string pseudo)
+ * \brief Permet d'enlever l'employé qui s'est déconnecté du serveur
+ * de la liste desthreads
+ * \param string pseudo
+ * \return l'index de la position où se trouve l'employe sinon -1
+ */
+int EnleveEmploye(string pseudo)
+{
+    int i=0;
+    while (i<liste_thread.size() and liste_thread[i].pseudo.compare(pseudo)!=0)
+    {
+        i++;
+    }
+    if (i<liste_thread.size())
+    {
+        return i;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 /**
@@ -741,39 +761,35 @@ void* RunServeur(void* p)
         }
         message="deconnexion>"+nom;
         cout << nom << " deconnecté" << endl;
-        //cout << "Saisissez une chaîne pour le test" << endl;
-        //getline(cin, message);
     }
-
+    //enlevé de la liste des threads
+    int index=EnleveEmploye(nom);
+    liste_thread.erase(liste_thread.begin()+index);
     pthread_exit(NULL);
 }
 
 /**
- * \brief Permet d'accueillir les employés en les acceptant
+ * \brief Permet d'accueillir les employés en les acceptant à travers
+ * notre socket local
  */
 void AccueilEmploye()
 {
-    /*int accueil=accept(destLocal,(struct sockaddr *) adresseExp,&taille);
-     if (accueil>=0)
-     {
-     * recv(accueil,recu,sizeof recu, 0);
-     * if (Analyse(message,desc).compare("refuse")==0)
-     * {
-     *  send(accueil,envoi,sizeof(envoi),0);
-     * }
-     * else
-     * {
-        pthread_create(&threads[nombre_client],NULL,RunServeur,(void*)&liste_thread[nombre_client]);
-        nombre_client++;
-        printf("Bonjour mon employe...\n");
-     * }
-        return true;
-     }
-     {
-     return false;
-     }
-     */
-    printf("Bonjour mon employe...\n");
+    int accueil=accept(destLocal,(struct sockaddr *) adresseExp,&taille);
+    if (accueil>=0)
+    {
+        recv(accueil,recu,sizeof recu, 0);
+        string recup=Analyse(recu,accueil);
+        if (recup.compare("connexion_refuse>")!=0)
+        {  
+            thread.mondesc=accueil;
+            thread.pseudo=recup;
+            liste_thread.push_back(thread);
+
+            pthread_create(&mesthreads[nombre_client],NULL,RunServeur,(void*)&liste_thread[nombre_client]);
+            nombre_client++;
+            //cout << "Bonjour mon employe..." << endl;
+        }
+    }
 }
 
 /**
@@ -783,16 +799,18 @@ void AccueilEmploye()
  * \return 0 si ça s'est bien passé
  */
 int main(int argc, char** argv)
-{
-    pthread_t threads[100];
-    /*
+{   
      Serveur();
      while(true)
      {
         AccueilEmploye();
-     * 
      }
-    */
+    
+     for (int i=0;i<mesthreads.size();i++)
+     {
+         pthread_join(mesthreads[i],NULL);
+     }
+     /*
     //Premier utilisateur
     thread.mondesc=0;
     thread.pseudo="coucou";
@@ -807,6 +825,6 @@ int main(int argc, char** argv)
     pthread_create(&threads[0],NULL,RunServeur,(void*)&liste_thread[0]);
     
     pthread_join(threads[0],NULL);
-    pthread_join(threads[1],NULL);
+    pthread_join(threads[1],NULL);*/
     return 0;
 }
