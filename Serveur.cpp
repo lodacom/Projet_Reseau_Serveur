@@ -21,7 +21,7 @@
 #include <pthread.h>
 using namespace std;
 
-int destLocal;
+int destLocal=0;
 bool controleur_present=false;
 int nombre_client=0;
 sockaddr_in* adresseExp;
@@ -50,14 +50,21 @@ vector<pthread_t> mesthreads;
  */
 void Serveur()
 {
-    SockDist Expd("0",31466);// pour autotest 31466/31467
+    SockDist Expd("localhost",31466);// pour autotest 31466/31467
     Sock BRlocal(SOCK_STREAM, 31467, 0);
     destLocal = BRlocal.getsDesc();
     taille=Expd.getsLen();
 
     adresseExp = Expd.getAdrDist();
-    listen(destLocal, 100);
-    printf("Démarrage du serveur....\n");
+    int test=listen(destLocal, 100);
+    if (test==0)
+    {
+        cout<< "Démarrage du serveur, il est en écoute" << endl;
+    }
+    else
+    {
+        cout << "Erreur de démarrage" << endl;
+    }
 
 }
 /**
@@ -89,11 +96,8 @@ void TransfertRapport(int desc,string pseudo)
             cpt=0;
         }
     }
-    if (pseudo.compare("controleur")==0)
-    {
-        envoi="fin_transfert>controleur";
-        send(desc,(const void *)envoi.c_str(),sizeof(envoi),0);
-    }
+    envoi="fin_transfert>"+pseudo;
+    send(desc,(const void *)envoi.c_str(),sizeof(envoi),0);
 }
 
 /**
@@ -120,7 +124,10 @@ vector<string> LectureDansListeFait()
         }
         else
         {
-            concat += recup;
+            if (recup!=' ')
+            {
+                concat += recup;
+            }
             //cout << "On concatène" << endl;
         }
     }
@@ -451,12 +458,8 @@ bool EstDansListeEtablitControleur(string p_pseudo)
  */
 string Analyse(string p_message,int desc)
 {
-    //recv(desc,recu,sizeof recu, 0);
-    //char* message=recu;
-    //string inter=message;
-    //printf("Analyse de la trame...\n");
     int i=0;
-    //cout << p_message << endl;
+    cout << p_message << endl;
     while(i<p_message.length() and p_message.at(i)!='>')
     {
         i++;
@@ -602,11 +605,19 @@ string Analyse(string p_message,int desc)
     if (action.compare("demande_liste_rapport_fait")==0)
     {
         vector<string> temp=LectureDansListeFait();
-        for(int i=0;i<temp.size();i++)
+        if (!temp.empty())
         {
-            //cout << temp[i] << endl;
-            string liste="liste_rapport_fait>"+temp[i];
-            send(desc,(const void *)liste.c_str(),sizeof(liste),0);
+            for(int i=0;i<temp.size();i++)
+            {
+                //cout << temp[i] << endl;
+                string liste="liste_rapport_fait>"+temp[i];
+                send(desc,(const void *)liste.c_str(),sizeof(liste),0);
+            }
+        }
+        else
+        {
+            string rep="reponse>Désolé mais aucun employé n'a fait de rapport";
+            send(desc,(const void *)rep.c_str(),sizeof(rep),0);
         }
         return "liste_rapport_fait";
     }
@@ -639,7 +650,9 @@ string Analyse(string p_message,int desc)
         }
         cout << "Vous allez recevoir le rapport de: " << transmission << endl;
         //il faut transférer le rapport au controleur
-        TransfertRapport(desc,"controleur");
+        TransfertRapport(desc,transmission);/*on envoie au controleur 
+                                             * le rapport de l'employé
+                                             */
         //on enlève du fichier qui contient la liste des rapports qui sont fait
         //mutex 2 mode unlock
          pthread_mutex_unlock(&verrou_acces_liste_fait);
@@ -680,20 +693,6 @@ string Analyse(string p_message,int desc)
 }
 
 /**
- * \fn string LancementServeur(string p_message)
- * \brief Permet de recevoir tous les messages
- * \param string p_message
- * \return une string correspondant à ce qu'on veut renvoyer
- */
-string LancementServeur(string p_message,int desc)
-{
-    // Reception du message
-    //printf("On lance le serveur...\n");
-    string message=p_message;
-    return Analyse(message,desc);
-}
-
-/**
  * \fn int EnleveEmploye(string pseudo)
  * \brief Permet d'enlever l'employé qui s'est déconnecté du serveur
  * de la liste desthreads
@@ -725,16 +724,22 @@ int EnleveEmploye(string pseudo)
  */
 void* RunServeur(void* p)
 {
-    string message;
+    //string message;
     string nom=((struct thread_data *)p)->pseudo;
     int desc=((struct thread_data *)p)->mondesc;
     
     cout << "Start run : " << nom << endl;
     cout << "Entrain d'exécuter le client num: " << desc << endl;
-    message="connexion>";
-    while (LancementServeur(message,desc).compare("deconnexion>")!=0)
+    //message="connexion>";
+    recv(desc,recu,sizeof recu, 0);
+    char* message=recu;
+    string inter=message;
+    while (Analyse(inter,desc).compare("deconnexion>")!=0)
     {
-        message="connexion_employe>"+nom;
+        recv(desc,recu,sizeof recu, 0);
+        message=recu;
+        inter=message;
+        /*message="connexion_employe>"+nom;
         LancementServeur(message,desc);
         
         if (nom.compare("controleur")==0)
@@ -760,7 +765,7 @@ void* RunServeur(void* p)
             LancementServeur(message,desc);
         }
         message="deconnexion>"+nom;
-        cout << nom << " deconnecté" << endl;
+        cout << nom << " deconnecté" << endl;*/
     }
     //enlevé de la liste des threads
     int index=EnleveEmploye(nom);
@@ -774,10 +779,14 @@ void* RunServeur(void* p)
  */
 void AccueilEmploye()
 {
+    cout << "On attend des clients...." << endl;
     int accueil=accept(destLocal,(struct sockaddr *) adresseExp,&taille);
     if (accueil>=0)
     {
-        recv(accueil,recu,sizeof recu, 0);
+        cout << "On a accepté un client!!" << endl;
+        recv(accueil,recu,sizeof recu, 0);/*on attend tout
+        *de suite une reception pour l'authentification 
+                                           */
         string recup=Analyse(recu,accueil);
         if (recup.compare("connexion_refuse>")!=0)
         {  
@@ -789,6 +798,10 @@ void AccueilEmploye()
             nombre_client++;
             //cout << "Bonjour mon employe..." << endl;
         }
+    }
+    else
+    {
+        perror("Il y a eu un rejet d'un client");
     }
 }
 
