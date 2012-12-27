@@ -13,15 +13,19 @@
 #include "sockdist.h"
 #include "sauvegarde.c"
 #include "sauvegarde.h"
+#include <sys/un.h>
+#include <fcntl.h>
 #include <vector>
 #include <string>
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 using namespace std;
 
-int destLocal=0;
+int destLocal=-1;
 bool controleur_present=false;
 int nombre_client=0;
 sockaddr_in* adresseExp;
@@ -50,23 +54,24 @@ vector<pthread_t> mesthreads;
  */
 void Serveur()
 {
-    SockDist Expd("localhost",31466);// pour autotest 31466/31467
+    SockDist Expd("0",31466);// pour autotest 31466/31467
     Sock BRlocal(SOCK_STREAM, 31467, 0);
     destLocal = BRlocal.getsDesc();
     taille=Expd.getsLen();
-
     adresseExp = Expd.getAdrDist();
-    int test=listen(destLocal, 100);
+    
+    int test=listen(destLocal, 10);
     if (test==0)
     {
-        cout<< "Démarrage du serveur, il est en écoute" << endl;
+        perror("Démarrage du serveur, il est en écoute");
     }
     else
     {
-        cout << "Erreur de démarrage" << endl;
+        perror("Erreur de démarrage");
     }
 
 }
+
 /**
  * \param int desc,string pseudo
  * \brief Permet d'envoyer le rapport à l'employé qui a fini
@@ -226,6 +231,7 @@ int ChercheDansListeEnCours(string p_pseudo)
  */
 int ChercheDansListeEtablitControleur(string p_pseudo)
 {
+    string sauvegarde;
     int courant=0;
     int nb_espace=0;
     fpos_t pos;
@@ -246,30 +252,42 @@ int ChercheDansListeEtablitControleur(string p_pseudo)
     {
         courant= fseek(lecf, 0, SEEK_SET);
         cout << "On effectue la recherche..." << endl;
-        string concat="";
+        char concat[100];
+        string concatNew=concat;
+        concatNew="";
         char recup;
         while ((recup=fgetc(lecf))!=EOF)
         {
             cout << recup << endl;
             if(recup == '@')
             {
-                 if(concat.compare(p_pseudo)==0)
+                 if(concatNew.compare(p_pseudo)==0)
                  {
                         cout << "trouvé" << endl;
                         trouve = true;
-                        break;
                  }
-                 concat = "";
-                 fgetpos(lecf,&pos);
-                 nb_espace=0;
-                 //cout << "Position du curseur" << pos << endl;
-                 cout << "On a trouvé le arobase dans la liste établit" << endl;
+                 else
+                 {
+                     cout << "On met dans la liste" << endl;
+                     string inter1=concatNew;
+                     cout << "1" << endl;
+                     string inter2="@";
+                     cout << "2" << endl;
+                     string inter3=inter1 + inter2;
+                     cout << "3" << endl;
+                     sauvegarde=sauvegarde + inter3;
+                     concatNew="";
+                     //fgetpos(lecf,&pos);
+                     nb_espace=0;
+                     //cout << "Position du curseur" << pos << endl;
+                    cout << "On a trouvé le arobase dans la liste établit" << endl;
+                 }
             }
             else
             {
                 if (recup!=' ')
                 {
-                        concat += recup;
+                        concatNew += recup;
                 }
                 else
                 {
@@ -289,15 +307,18 @@ int ChercheDansListeEtablitControleur(string p_pseudo)
     else
     {
         cout << "Youpi on a trouvé l'employé: " << p_pseudo << endl;
-        FILE * lecf=fopen(LISTE_ETABLIT_CONTROLEUR, "r+");//on ouvre en écriture
-        fsetpos(lecf,&pos);//on se met là où on a repéré le pseudo
-        int i=0;
-        while (i<=p_pseudo.length()+nb_espace)
-        {
-            cout << "On essaie d'écraser les valeurs" << endl;
-            fputs (" ",lecf);//on écrase le pseudo plus l'arobase
-            i++;
-        }
+        FILE * lecf=fopen(LISTE_ETABLIT_CONTROLEUR, "w");//on ouvre en écriture
+       // fsetpos(lecf,&pos);//on se met là où on a repéré le pseudo
+//        int i=0;
+//        while (i<p_pseudo.length()+nb_espace)
+//        {
+//            cout << "On essaie d'écraser les valeurs" << endl;
+//            fputs ('',lecf);//on écrase le pseudo plus l'arobase
+//            i++;
+//        }
+
+        fputs(sauvegarde.c_str(),lecf);
+       
         fclose(lecf);
         return 0;
     }
@@ -411,29 +432,35 @@ bool EstDansListeEtablitControleur(string p_pseudo)
     {
         fseek(lecf, 0, SEEK_SET);
         cout << "On effectue la recherche..." << endl;
-        string concat="";
+        char concat[100];
+        string concatNew = concat;
+        concatNew="";
         char recup;
         while ((recup=fgetc(lecf))!=EOF)
         {
             cout << recup << endl;
             if(recup == '@')
             {
-                 if(concat.compare(p_pseudo)==0)
+                //cout << "concatNew : " << concatNew << endl;
+                //cout << "p_pseudo : " << p_pseudo << endl;
+                 if(concatNew.compare(p_pseudo)==0)
                  {
                         cout << "trouvé" << endl;
                         trouve = true;
                         break;
                  }
-                 concat = "";
-                 cout << "On a trouvé le arobase . . . .l" << endl;
+                 concatNew="";
+                 cout << "Pseudo ne correspond pas" << endl;
             }
             else
             {
                 if (recup!=' ')
                 {
-                        concat += recup;
+                        cout << "On concatène" << endl;
+                        concatNew+=recup;
+                        cout << concatNew << endl;  
+
                 }
-                //cout << "On concatène" << endl;
             }
         }
     }
@@ -466,8 +493,8 @@ string Analyse(string p_message,int desc)
     }
     string action=p_message.substr(0,i);
     string transmission=p_message.substr(i+1,p_message.length());
-    //cout << "La trame a été analysée avec action: "<< action << " et message: " << transmission << endl;
-    
+    cout << "La trame a été analysée avec action: "<< action << " et message: " << transmission << endl;
+    cout << transmission.length() << endl;
     //printf("On décide de ce qu'on va faire\n");
     if (action.compare("connexion_employe")==0)
     {
@@ -780,11 +807,13 @@ void* RunServeur(void* p)
 void AccueilEmploye()
 {
     cout << "On attend des clients...." << endl;
+    //cout << destLocal << endl;
     int accueil=accept(destLocal,(struct sockaddr *) adresseExp,&taille);
+    cout << "On passe par là" << endl;
     if (accueil>=0)
     {
         cout << "On a accepté un client!!" << endl;
-        recv(accueil,recu,sizeof recu, 0);/*on attend tout
+        recv(accueil,recu,100*sizeof(&recu), 0);/*on attend tout
         *de suite une reception pour l'authentification 
                                            */
         string recup=Analyse(recu,accueil);
