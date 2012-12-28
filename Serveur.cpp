@@ -14,6 +14,8 @@
 #include "sauvegarde.c"
 #include "sauvegarde.h"
 #include <sys/un.h>
+#include <sstream>
+#include <iostream>
 #include <fcntl.h>
 #include <vector>
 #include <stdio.h>
@@ -231,6 +233,10 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
 {
     cout << "On cherche à enlever " << p_pseudo << " de la liste établit par le controleur" << endl;
     string super_concat;
+    char concat[1000];
+    string concatNew =concat;
+    concatNew.clear();
+    char recup;
     FILE * lecf_2=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
     if (lecf_2==NULL)
     {
@@ -246,22 +252,24 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
     {
         fseek(lecf_2, 0, SEEK_SET);
         cout << "On effectue la recherche..." << endl;
-        char concat[100];
-        string concatNew = concat;
-        concatNew="";
-        char recup;
         while ((recup=fgetc(lecf_2))!=EOF)
         {
             cout << recup << endl;
             if(recup == '@')
             {
-                 if(concatNew.compare(p_pseudo)==0)
+                cout << "Comparaison : " << concatNew << p_pseudo << concatNew.length() << p_pseudo.length() << endl;
+                        if(concatNew.compare(p_pseudo)==0)
                  {
                         cout << "trouvé" << endl;
                         trouve = true;
                  }
-                 //super_concat+=concatNew;
-                 concatNew="";
+                 cout << "ConcatNew : " << concatNew << endl;
+                 super_concat+=concatNew ;
+                 cout << "Grosse blague, super_concat : " << super_concat << endl;
+                 cout << " On remet à zéro ConcatNew : " << concatNew << endl;
+                 concatNew=concat;
+                 cout << "l'affectation concat marche" << endl;
+                 concatNew="";                    
                  cout << "Pseudo ne correspond pas" << endl;
             }
             else
@@ -269,12 +277,16 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
                 if (recup!=' ')
                 {
                         cout << "On concatène" << endl;
+                        cout << "valeur de ce putin de concatNew :" << concatNew << endl;
+                        cout << "valeur de ce putin de recup : " << recup << endl;
                         concatNew+=recup;
+                        cout << "C'est concaténé" << endl;
                         //cout << concatNew << endl;  
 
                 }
             }
         }
+        cout << "on sort du while" << endl;
     }
     fclose(lecf_2);
     if (!trouve)
