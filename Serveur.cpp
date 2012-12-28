@@ -232,39 +232,41 @@ int ChercheDansListeEnCours(string p_pseudo)
 void ChercheDansListeEtablitControleur(string p_pseudo)
 {
     cout << "On cherche à enlever " << p_pseudo << " de la liste établit par le controleur" << endl;
-    string super_concat;
+    char* super_concat;
     char concat[1000];
     string concatNew =concat;
     concatNew.clear();
     char recup;
-    FILE * lecf_2=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
-    if (lecf_2==NULL)
+    FILE * lecf=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
+    if (lecf==NULL)
     {
         cout << "Problème d'ouverture de fichier" << endl;
     }
     bool trouve=false;
-    fseek(lecf_2, 0, SEEK_END);
-    if (ftell (lecf_2)==0)
+    fseek(lecf, 0, SEEK_END);
+    if (ftell (lecf)==0)
     {
         cout << "Y a un truc là!!!!" << endl;
     }
     else
     {
-        fseek(lecf_2, 0, SEEK_SET);
+        fseek(lecf, 0, SEEK_SET);
         cout << "On effectue la recherche..." << endl;
-        while ((recup=fgetc(lecf_2))!=EOF)
+        while ((recup=fgetc(lecf))!=EOF)
         {
             cout << recup << endl;
             if(recup == '@')
             {
                 cout << "Comparaison : " << concatNew << p_pseudo << concatNew.length() << p_pseudo.length() << endl;
-                        if(concatNew.compare(p_pseudo)==0)
+                 if(concatNew.compare(p_pseudo)==0)
                  {
                         cout << "trouvé" << endl;
                         trouve = true;
                  }
                  cout << "ConcatNew : " << concatNew << endl;
-                 super_concat+=concatNew ;
+                 
+                 strcat(super_concat,concatNew.c_str());
+                 
                  cout << "Grosse blague, super_concat : " << super_concat << endl;
                  cout << " On remet à zéro ConcatNew : " << concatNew << endl;
                  concatNew=concat;
@@ -286,9 +288,9 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
                 }
             }
         }
-        cout << "on sort du while" << endl;
+        cout << "on sort du while" << super_concat << "hop" <<endl;
     }
-    fclose(lecf_2);
+    fclose(lecf);
     if (!trouve)
     {
         cout << "On a pas trouvé l'employé" << endl;
