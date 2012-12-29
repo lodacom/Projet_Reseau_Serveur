@@ -605,6 +605,7 @@ string Analyse(string p_message,int desc)
         vector<string> temp=LectureDansListeFait();
         if (!temp.empty())
         {
+            cout << "taille de temp : " << temp.size() << endl;
             for(int i=0;i<temp.size();i++)
             {
                 //cout << temp[i] << endl;
@@ -613,12 +614,15 @@ string Analyse(string p_message,int desc)
                 strcat(tmp,temp[i].c_str());
                 send(desc,tmp,sizeof(tmp),0);
             }
+            char tmp[100];
+            strcpy(tmp,"action_suivante_controleur>La liste a été envoyée");
+            send(desc,tmp,sizeof(tmp),0);
         }
         else
         {
             cout << "La liste est vide" << endl;
             char tmp[100];
-            strcpy(tmp,"action_suivante_controleur>La liste est déjà remplie");
+            strcpy(tmp,"action_suivante_controleur>La liste est vide");
             send(desc,tmp,sizeof(tmp),0);
             cout << "Envoi effectué"<<endl;
         }
