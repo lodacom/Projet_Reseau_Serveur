@@ -116,6 +116,14 @@ vector<string> LectureDansListeFait()
     cout << "On cherche à établir la liste des rapports faits" << endl;
     FILE * lrf=fopen(LISTE_RAPPORT_FAIT, "r");
     cout << "On effectue la recherche..." << endl;
+    fseek(lrf, 0, SEEK_END);
+    if (ftell (lrf)==0)
+    {
+        cout << "On retourne " << endl;
+        fclose(lrf);
+        return liste_rapport_fait;
+    }
+    fseek(lrf, 0, SEEK_SET);
     string concat="";
     char recup;
     while ((recup=fgetc(lrf))!=EOF)
@@ -232,17 +240,11 @@ int ChercheDansListeEnCours(string p_pseudo)
 void ChercheDansListeEtablitControleur(string p_pseudo)
 {
     cout << "On cherche à enlever " << p_pseudo << " de la liste établit par le controleur" << endl;
-    char* super_concat;
-    char concat[1000];
-    string concatNew =concat;
-    concatNew.clear();
-    char recup;
-    FILE * lecf=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
-    if (lecf==NULL)
+    FILE * lecf=fopen("liste_etablit_controleur", "r");
+    /*if (lecf==NULL)
     {
         cout << "Problème d'ouverture de fichier" << endl;
     }
-    bool trouve=false;
     fseek(lecf, 0, SEEK_END);
     if (ftell (lecf)==0)
     {
@@ -250,57 +252,42 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
     }
     else
     {
-        fseek(lecf, 0, SEEK_SET);
+        fseek(lecf, 0, SEEK_SET);*/
         cout << "On effectue la recherche..." << endl;
-        while ((recup=fgetc(lecf))!=EOF)
-        {
-            cout << recup << endl;
-            if(recup == '@')
-            {
-                cout << "Comparaison : " << concatNew << p_pseudo << concatNew.length() << p_pseudo.length() << endl;
-                 if(concatNew.compare(p_pseudo)==0)
-                 {
-                        cout << "trouvé" << endl;
-                        trouve = true;
-                 }
-                 cout << "ConcatNew : " << concatNew << endl;
-                 
-                 strcat(super_concat,concatNew.c_str());
-                 
-                 cout << "Grosse blague, super_concat : " << super_concat << endl;
-                 cout << " On remet à zéro ConcatNew : " << concatNew << endl;
-                 concatNew=concat;
-                 cout << "l'affectation concat marche" << endl;
-                 concatNew="";                    
-                 cout << "Pseudo ne correspond pas" << endl;
-            }
-            else
-            {
-                if (recup!=' ')
-                {
-                        cout << "On concatène" << endl;
-                        cout << "valeur de ce putin de concatNew :" << concatNew << endl;
-                        cout << "valeur de ce putin de recup : " << recup << endl;
-                        concatNew+=recup;
-                        cout << "C'est concaténé" << endl;
-                        //cout << concatNew << endl;  
-
-                }
+        char c;
+        vector<string> listeNom;
+        string tmp = "";
+        while((c = fgetc(lecf)) != EOF){
+            if(c == '@'){
+                listeNom.push_back(tmp);
+                tmp = "";
+                continue;
+            }else if( c != '\n'){
+                tmp += c;
+                cout << "On passe" << endl;
             }
         }
-        cout << "on sort du while" << super_concat << "hop" <<endl;
-    }
-    fclose(lecf);
-    if (!trouve)
-    {
-        cout << "On a pas trouvé l'employé" << endl;
-    }
-    else
-    {
-        cout << super_concat << endl;
+        cout << "On passe ici" << endl;
+        listeNom.push_back(tmp);
+        fclose(lecf);
         
-        cout << "Youpi on a trouvé l'employé: " << p_pseudo << endl; 
-    }
+        string reste = "";
+        
+        for(vector<string>::iterator i = listeNom.begin() ; i != listeNom.end() ; i++){
+            if((*i).compare(p_pseudo) == 0){
+                //retour = true;
+            }else{
+                if(reste.length() > 0){
+                    reste += '@';
+                }
+                reste += *i;
+            }
+        }
+        
+        lecf = fopen("liste_etablit_controleur", "w");
+        fprintf(lecf,"%s",reste.c_str());
+        fclose(lecf);
+    //}
 }
 
 /**
@@ -483,7 +470,7 @@ string Analyse(string p_message,int desc)
         {
             if (!controleur_present)
             {
-                //cout << "Un controleur se connecte..." << endl;
+                cout << "Un controleur se connecte..." << endl;
                 controleur_present=true;
                 
                 liste_etablit_controleur_fichier=fopen(LISTE_ETABLIT_CONTROLEUR, "r");
@@ -496,9 +483,11 @@ string Analyse(string p_message,int desc)
                 }
                 else
                 {
-                    //cout<< "Liste déjà remplie. . ." << endl;
-                    string rep="action_suivante_controleur>La liste est déjà remplie";
-                    send(desc,(const void *)rep.c_str(),sizeof(rep),0);
+                    cout<< "Liste déjà remplie. . ." << endl;
+                    char tmp[100];
+                    strcpy(tmp,"action_suivante_controleur>La liste est déjà remplie");
+                    send(desc,tmp,sizeof(tmp),0);
+                    cout << "Message envoyé" << endl;
                 }
                 return transmission;
             }
@@ -619,14 +608,19 @@ string Analyse(string p_message,int desc)
             for(int i=0;i<temp.size();i++)
             {
                 //cout << temp[i] << endl;
-                string liste="liste_rapport_fait>"+temp[i];
-                send(desc,(const void *)liste.c_str(),sizeof(liste),0);
+                char tmp[100];
+                strcpy(tmp,"liste_rapport_fait>");
+                strcat(tmp,temp[i].c_str());
+                send(desc,tmp,sizeof(tmp),0);
             }
         }
         else
         {
-            string rep="reponse>Désolé mais aucun employé n'a fait de rapport";
-            send(desc,(const void *)rep.c_str(),sizeof(rep),0);
+            cout << "La liste est vide" << endl;
+            char tmp[100];
+            strcpy(tmp,"action_suivante_controleur>La liste est déjà remplie");
+            send(desc,tmp,sizeof(tmp),0);
+            cout << "Envoi effectué"<<endl;
         }
         return "liste_rapport_fait";
     }
@@ -652,8 +646,11 @@ string Analyse(string p_message,int desc)
             else
             {
                 //cout << "L'employé n'a pas encore fini d'écrire son rapport" << endl;
-                string rep="reponse>Désolé mais "+transmission+" n'a pas encore fini d'écrire";
-                send(desc,(const void *)rep.c_str(),sizeof(rep),0);
+                char tmp[100];
+                strcpy(tmp,"action_suivante_controleur>Désolé mais ");
+                strcat(tmp,transmission.c_str());
+                strcat(tmp," n'a pas encore fini d'écrire");
+                send(desc,tmp,sizeof(tmp),0);
                 return "pas_fini";
             }
         }
@@ -698,8 +695,10 @@ string Analyse(string p_message,int desc)
             controleur_present=false;
         }
         //cout << "Un utilisateur ou un controleur se déconnecte" << endl;
-        string deconnec="deconnexion>"+transmission;
-        send(desc,(const void *)deconnec.c_str(),sizeof(deconnec),0);
+        char tmp[100];
+        strcpy(tmp,"deconnexion>");
+        strcat(tmp,transmission.c_str());
+        send(desc,tmp,sizeof(tmp),0);
         return "deconnexion>";
     }
     return "impossible";
@@ -744,14 +743,15 @@ void* RunServeur(void* p)
     cout << "Start run : " << nom << endl;
     cout << "Entrain d'exécuter le client num: " << desc << endl;
     //message="connexion>";
-    recv(desc,recu,sizeof recu, 0);
+    recv(desc,recu,100*sizeof(&recu), 0);
     char* message=recu;
-    string inter=message;
+    string inter=recu;
     while (Analyse(inter,desc).compare("deconnexion>")!=0)
     {
-        recv(desc,recu,sizeof recu, 0);
+        cout << "On attend le prochain message" << endl;
+        recv(desc,recu,100*sizeof(&recu), 0);
         message=recu;
-        inter=message;
+        inter=recu;
         /*message="connexion_employe>"+nom;
         LancementServeur(message,desc);
         
@@ -808,8 +808,11 @@ void AccueilEmploye()
             thread.mondesc=accueil;
             thread.pseudo=recup;
             liste_thread.push_back(thread);
-
-            pthread_create(&mesthreads[nombre_client],NULL,RunServeur,(void*)&liste_thread[nombre_client]);
+            
+            cout << "Création d'un thread" << endl;
+            pthread_t mon_thread;
+            pthread_create(&mon_thread,NULL,RunServeur,(void*)&liste_thread[nombre_client]);
+            cout << "On lance le thread" << endl;
             nombre_client++;
             //cout << "Bonjour mon employe..." << endl;
         }
