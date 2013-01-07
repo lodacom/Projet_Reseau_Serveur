@@ -13,11 +13,11 @@
 #include "sockdist.h"
 #include "sauvegarde.c"
 #include "sauvegarde.h"
-#include <sys/un.h>
 #include <sstream>
 #include <iostream>
 #include <fcntl.h>
 #include <vector>
+#include <list>
 #include <stdio.h>
 #include <errno.h>
 #include <string>
@@ -26,6 +26,9 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 using namespace std;
+
+
+vector<string> listString;
 
 int destLocal=-1;
 bool controleur_present=false;
@@ -255,11 +258,15 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
         fseek(lecf, 0, SEEK_SET);*/
         cout << "On effectue la recherche..." << endl;
         char c;
-        vector<string> listeNom;
+        
+        listString.clear();
+        
+        cout << "plop" << endl;
+        
         string tmp = "";
         while((c = fgetc(lecf)) != EOF){
             if(c == '@'){
-                listeNom.push_back(tmp);
+                listString.push_back(tmp);
                 tmp = "";
                 continue;
             }else if( c != '\n'){
@@ -267,14 +274,15 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
                 cout << "On passe" << endl;
             }
         }
+        
         cout << "On passe ici" << endl;
-        listeNom.push_back(tmp);
+        //listeNom.push_back(tmp);
         fclose(lecf);
         
         string reste = "";
         
-        for(vector<string>::iterator i = listeNom.begin() ; i != listeNom.end() ; i++){
-            if((*i).compare(p_pseudo) == 0){
+        for(vector<string>::iterator i = listString.begin() ; i != listString.end() ; i++){
+            if(p_pseudo.compare(*i) == 0){
                 //retour = true;
             }else{
                 if(reste.length() > 0){
@@ -284,9 +292,16 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
             }
         }
         
-        lecf = fopen("liste_etablit_controleur", "w");
-        fprintf(lecf,"%s",reste.c_str());
-        fclose(lecf);
+        if(reste.length() > 0){
+            reste += '@';
+            lecf = fopen("liste_etablit_controleur", "w");
+            fprintf(lecf,"%s",reste.c_str());
+            fclose(lecf);
+        }else{
+            lecf = fopen("liste_etablit_controleur", "w");
+            fclose(lecf);
+        }
+
     //}
 }
 
@@ -494,8 +509,8 @@ string Analyse(string p_message,int desc)
             else
             {
                 //cout << "Un controleur existe déjà désolé" << endl;
-                string rep="reponse>Désolé un controleur s'est déjà connecté";
-                send(desc,(const void *)rep.c_str(),sizeof(rep),0);
+                char rep[100] = "reponse>Désolé un controleur s'est déjà connecté";
+                send(desc, rep, sizeof(rep),0);
                 return "connexion_refuse>";
             }
         }
@@ -517,15 +532,15 @@ string Analyse(string p_message,int desc)
                     fputs (transmission.c_str(),lrecf);//transfert dans la liste rapport en cours
                     fclose(lrecf);
                     cout << "Vous êtes un employé au rapport!" << endl;
-                    string connect="connexion_employe>";
-                    send(desc,(const void *)connect.c_str(),sizeof(connect),0);
+                    char envoi[100] = "connexion_employe>";
+                    send(desc, envoi,sizeof(envoi),0);
                     return transmission;//on retourne l'employé qui a été connecté
                 }
                 else
                 {
                     cout << "Vous avez été refusé par le serveur" << endl;
-                    string refus="connexion_refuse>";
-                    send(desc,(const void *)refus.c_str(),sizeof(refus),0);
+                    char refus[100] = "connexion_refuse>";
+                    send(desc, refus,sizeof(refus),0);
                     return "connexion_refuse>";
                 }
             }
@@ -747,13 +762,13 @@ void* RunServeur(void* p)
     cout << "Start run : " << nom << endl;
     cout << "Entrain d'exécuter le client num: " << desc << endl;
     //message="connexion>";
-    recv(desc,recu,100*sizeof(&recu), 0);
+    recv(desc,recu,sizeof(recu), 0);
     char* message=recu;
     string inter=recu;
     while (Analyse(inter,desc).compare("deconnexion>")!=0)
     {
         cout << "On attend le prochain message" << endl;
-        recv(desc,recu,100*sizeof(&recu), 0);
+        recv(desc,recu,sizeof(recu), 0);
         message=recu;
         inter=recu;
         /*message="connexion_employe>"+nom;
@@ -803,7 +818,7 @@ void AccueilEmploye()
     if (accueil>=0)
     {
         cout << "On a accepté un client!!" << endl;
-        recv(accueil,recu,100*sizeof(&recu), 0);/*on attend tout
+        recv(accueil,recu, sizeof(recu), 0);/*on attend tout
         *de suite une reception pour l'authentification 
                                            */
         string recup=Analyse(recu,accueil);
