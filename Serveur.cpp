@@ -234,6 +234,16 @@ int ChercheDansListeEnCours(string p_pseudo)
     }
 }
 
+char *char2string(char c)
+{
+   char *str= (char*)malloc(2*sizeof(char));
+   if(str==NULL)
+     return NULL;
+   str[0]=c;
+   str[1]='\0';
+   return str;
+}
+
 /**
  * \fn int ChercheDansListeEtablitControleur(string p_pseudo)
  * \brief Cherche dans le fichier établi par le controleur s'il y a p_pseudo
@@ -258,22 +268,34 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
         fseek(lecf, 0, SEEK_SET);*/
         cout << "On effectue la recherche..." << endl;
         char c;
-        
+        vector<char*> listedemerde;
         listString.clear();
         
         cout << "plop" << endl;
         
         string tmp = "";
+        
+        char* tmp2 = (char*)malloc(100*sizeof(char));
+        
         while((c = fgetc(lecf)) != EOF){
             if(c == '@'){
-                listString.push_back(tmp);
-                tmp = "";
+                cout << "koala" << endl;
+                //tmp.append(tmp2);
+                listedemerde.push_back(tmp2);
+                //tmp = "";
+                //strcpy(tmp2, "");
+                tmp2 = (char*)malloc(100*sizeof(char));
                 continue;
             }else if( c != '\n'){
-                tmp += c;
+                cout << "koala2" << endl;
+                strcat(tmp2, char2string(c));
+                cout << tmp2 << endl;
                 cout << "On passe" << endl;
+                
             }
         }
+        
+        
         
         cout << "On passe ici" << endl;
         //listeNom.push_back(tmp);
@@ -281,8 +303,11 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
         
         string reste = "";
         
-        for(vector<string>::iterator i = listString.begin() ; i != listString.end() ; i++){
-            if(p_pseudo.compare(*i) == 0){
+        for(vector<char*>::iterator i = listedemerde.begin() ; i != listedemerde.end() ; i++){
+            
+            cout << (char*)*i << "  " << p_pseudo.c_str() << "  " << strcmp(*i, p_pseudo.c_str()) << endl;
+            
+            if(strcmp(*i, p_pseudo.c_str()) == 0){
                 //retour = true;
             }else{
                 if(reste.length() > 0){
@@ -301,6 +326,8 @@ void ChercheDansListeEtablitControleur(string p_pseudo)
             lecf = fopen("liste_etablit_controleur", "w");
             fclose(lecf);
         }
+        
+        //free(tmp2);
 
     //}
 }
